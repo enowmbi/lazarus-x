@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
 
   helper :all
   helper_method :can_access_request?
-  protect_from_forgery # :secret => '434571160a81b5595319c859d32060c1'
-  filter_parameter_logging :password
+  # protect_from_forgery # :secret => '434571160a81b5595319c859d32060c1'
+  # filter_parameter_logging :password
 
   before_filter { |c| Authorization.current_user = c.current_user }
   before_filter :message_user
