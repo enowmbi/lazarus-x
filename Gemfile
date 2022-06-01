@@ -51,6 +51,18 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+
+  # Add rspec
+  gem "rspec-rails"
+
+  # Add shoulda-matchers
+  gem "shoulda-matchers"
+
+  # Add simplecov
+  gem "simplecov", require: false
+
+  # Add factory_bot_rails
+  gem "factory_bot_rails"
 end
 
 group :development do
