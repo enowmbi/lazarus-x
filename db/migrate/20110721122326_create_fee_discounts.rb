@@ -5,10 +5,9 @@ class CreateFeeDiscounts < ActiveRecord::Migration[7.0]
       t.string     :name
       t.references :receiver
       t.references :finance_fee_category
-      t.decimal    :discount, :precision =>15, :scale => 2
-      t.boolean    :is_amount, :default=> false
+      t.decimal    :discount, precision: 15, scale: 2
+      t.boolean    :is_amount, default: false
     end
-
   end
 
   def self.down

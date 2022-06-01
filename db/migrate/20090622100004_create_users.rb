@@ -9,12 +9,12 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.boolean  :admin
       t.boolean  :student
       t.boolean  :employee
-      
+
       t.string   :hashed_password
       t.string   :salt
       t.string   :reset_password_code
       t.datetime :reset_password_code_until
-      
+
       t.timestamps
     end
   end

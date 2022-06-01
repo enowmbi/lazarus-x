@@ -5,10 +5,10 @@ class CreateExams < ActiveRecord::Migration[7.0]
       t.references :subject
       t.datetime   :start_time
       t.datetime   :end_time
-      t.decimal    :maximum_marks,:precision => 10, :scale => 2
-      t.decimal    :minimum_marks,:precision => 10, :scale => 2
+      t.decimal    :maximum_marks, precision: 10, scale: 2
+      t.decimal    :minimum_marks, precision: 10, scale: 2
       t.references :grading_level
-      t.integer    :weightage, :default => 0
+      t.integer    :weightage, default: 0
 
       t.references :event
       t.timestamps
@@ -18,5 +18,4 @@ class CreateExams < ActiveRecord::Migration[7.0]
   def self.down
     drop_table :exams
   end
-
 end

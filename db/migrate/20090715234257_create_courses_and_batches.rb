@@ -4,7 +4,7 @@ class CreateCoursesAndBatches < ActiveRecord::Migration[7.0]
       t.string     :course_name
       t.string     :code
       t.string     :section_name
-      t.boolean    :is_deleted, :default => false
+      t.boolean    :is_deleted, default: false
       t.timestamps
     end
 
@@ -13,8 +13,8 @@ class CreateCoursesAndBatches < ActiveRecord::Migration[7.0]
       t.references :course
       t.datetime   :start_date
       t.datetime   :end_date
-      t.boolean    :is_active, :default => true
-      t.boolean    :is_deleted, :default => false
+      t.boolean    :is_active, default: true
+      t.boolean    :is_deleted, default: false
     end
   end
 
@@ -22,5 +22,4 @@ class CreateCoursesAndBatches < ActiveRecord::Migration[7.0]
     drop_table :batches
     drop_table :courses
   end
-
 end

@@ -7,8 +7,8 @@ class CreateApplyLeaves < ActiveRecord::Migration[7.0]
       t.date        :start_date
       t.date        :end_date
       t.string      :reason
-      t.boolean     :approved, :default => false
-      t.boolean     :viewed_by_manager, :default => false
+      t.boolean     :approved, default: false
+      t.boolean     :viewed_by_manager, default: false
       t.string      :manager_remark
     end
   end

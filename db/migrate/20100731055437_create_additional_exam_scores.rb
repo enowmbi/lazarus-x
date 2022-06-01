@@ -3,7 +3,7 @@ class CreateAdditionalExamScores < ActiveRecord::Migration[7.0]
     create_table :additional_exam_scores do |t|
       t.references :student
       t.references :additional_exam
-      t.decimal    :marks, :precision => 7, :scale => 2
+      t.decimal    :marks, precision: 7, scale: 2
       t.references :grading_level
       t.string     :remarks
       t.boolean    :is_failed

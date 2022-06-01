@@ -29,20 +29,19 @@ class CreateArchivedEmployees < ActiveRecord::Migration[7.0]
       t.string     :blood_group
       t.references :nationality
 
-
       t.string     :home_address_line1
       t.string     :home_address_line2
       t.string     :home_city
       t.string     :home_state
       t.integer    :home_country_id
-      t.string    :home_pin_code
+      t.string :home_pin_code
 
       t.string     :office_address_line1
       t.string     :office_address_line2
       t.string     :office_city
       t.string     :office_state
       t.integer    :office_country_id
-      t.string    :office_pin_code
+      t.string :office_pin_code
 
       t.string     :office_phone1
       t.string     :office_phone2
@@ -54,7 +53,7 @@ class CreateArchivedEmployees < ActiveRecord::Migration[7.0]
       t.column   :photo_filename,       :string
       t.column   :photo_content_type,   :string
       t.column   :photo_data,           :binary,
-        :limit => 5.megabytes
+                 limit: 5.megabytes
       t.timestamps
     end
   end

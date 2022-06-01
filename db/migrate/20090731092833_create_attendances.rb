@@ -3,8 +3,8 @@ class CreateAttendances < ActiveRecord::Migration[7.0]
     create_table :attendances do |t|
       t.references :student
       t.references :period_table_entry
-      t.boolean :forenoon, :default => false
-      t.boolean :afternoon, :default => false
+      t.boolean :forenoon, default: false
+      t.boolean :afternoon, default: false
       t.string :reason
     end
   end

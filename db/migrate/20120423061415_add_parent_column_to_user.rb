@@ -1,9 +1,9 @@
 class AddParentColumnToUser < ActiveRecord::Migration[7.0]
   def self.up
-    add_column  :users ,:parent , :boolean
+    add_column :users, :parent, :boolean
   end
 
   def self.down
-    remove_column   :users ,:parent
+    remove_column :users, :parent
   end
 end

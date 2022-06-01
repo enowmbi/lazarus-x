@@ -4,7 +4,7 @@ class CreateGroupedExamReports < ActiveRecord::Migration[7.0]
       t.integer :batch_id
       t.integer :student_id
       t.integer :exam_group_id
-      t.decimal :marks, :precision=>15, :scale=>2
+      t.decimal :marks, precision: 15, scale: 2
       t.string :score_type
       t.integer :subject_id
 

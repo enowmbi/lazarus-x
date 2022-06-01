@@ -8,7 +8,7 @@ class CreateAdditionalExams < ActiveRecord::Migration[7.0]
       t.integer    :maximum_marks
       t.integer    :minimum_marks
       t.references :grading_level
-      t.integer    :weightage, :default => 0
+      t.integer    :weightage, default: 0
 
       t.references :event
       t.timestamps

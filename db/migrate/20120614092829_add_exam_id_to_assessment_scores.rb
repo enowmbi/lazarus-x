@@ -1,7 +1,7 @@
 class AddExamIdToAssessmentScores < ActiveRecord::Migration[7.0]
   def self.up
-    add_column  :assessment_scores,   :exam_id,   :integer
-    add_column  :assessment_scores,   :batch_id,   :integer
+    add_column  :assessment_scores,   :exam_id, :integer
+    add_column  :assessment_scores,   :batch_id, :integer
   end
 
   def self.down

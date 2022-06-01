@@ -3,7 +3,6 @@ class AddColumnsToWeekdays < ActiveRecord::Migration[7.0]
     add_column :weekdays, :name, :string
     add_column :weekdays, :sort_order, :integer
     add_column :weekdays, :day_of_week, :integer
-
   end
 
   def self.down

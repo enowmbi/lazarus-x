@@ -4,7 +4,7 @@ class CreateFinanceTransactionCategories < ActiveRecord::Migration[7.0]
       t.string  :name
       t.string  :description
       t.boolean :is_income
-      t.boolean :deleted, :null => false, :default => false
+      t.boolean :deleted, null: false, default: false
     end
   end
 

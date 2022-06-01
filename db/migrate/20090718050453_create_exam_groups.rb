@@ -4,8 +4,8 @@ class CreateExamGroups < ActiveRecord::Migration[7.0]
       t.string     :name
       t.references :batch
       t.string     :exam_type
-      t.boolean    :is_published, :default=>false
-      t.boolean    :result_published, :default=>false
+      t.boolean    :is_published, default: false
+      t.boolean    :result_published, default: false
       t.date       :exam_date
     end
   end

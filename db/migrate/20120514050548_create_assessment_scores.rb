@@ -3,7 +3,7 @@ class CreateAssessmentScores < ActiveRecord::Migration[7.0]
     create_table :assessment_scores do |t|
       t.integer       :student_id
       t.integer       :assessment_tool_id
-#      t.integer       :exam_id
+      #      t.integer       :exam_id
       t.integer       :grade_points
       t.timestamps
     end

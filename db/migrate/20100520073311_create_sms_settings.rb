@@ -2,7 +2,7 @@ class CreateSmsSettings < ActiveRecord::Migration[7.0]
   def self.up
     create_table :sms_settings do |t|
       t.string :settings_key
-      t.boolean :is_enabled, :default=>false
+      t.boolean :is_enabled, default: false
     end
   end
 

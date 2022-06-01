@@ -1,6 +1,6 @@
 class AddMarksToClassDesignations < ActiveRecord::Migration[7.0]
   def self.up
-    add_column :class_designations, :marks, :decimal, :precision=>15, :scale=>2
+    add_column :class_designations, :marks, :decimal, precision: 15, scale: 2
   end
 
   def self.down

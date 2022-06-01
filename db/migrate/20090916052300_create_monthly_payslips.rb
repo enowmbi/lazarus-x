@@ -5,9 +5,8 @@ class CreateMonthlyPayslips < ActiveRecord::Migration[7.0]
       t.references :employee
       t.references :payroll_category
       t.string     :amount
-      t.boolean   :is_approved,:null => false, :default => false
-      t.references   :approver
-      
+      t.boolean :is_approved, null: false, default: false
+      t.references :approver
     end
   end
 

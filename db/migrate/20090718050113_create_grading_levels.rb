@@ -5,7 +5,7 @@ class CreateGradingLevels < ActiveRecord::Migration[7.0]
       t.references :batch
       t.integer    :min_score
       t.integer    :order
-      t.boolean    :is_deleted, :default => false
+      t.boolean    :is_deleted, default: false
       t.timestamps
     end
   end
@@ -13,5 +13,4 @@ class CreateGradingLevels < ActiveRecord::Migration[7.0]
   def self.down
     drop_table :grading_levels
   end
-
 end

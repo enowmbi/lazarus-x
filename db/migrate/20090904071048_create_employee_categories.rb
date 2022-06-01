@@ -10,5 +10,4 @@ class CreateEmployeeCategories < ActiveRecord::Migration[7.0]
   def self.down
     drop_table :employee_categories
   end
-
 end

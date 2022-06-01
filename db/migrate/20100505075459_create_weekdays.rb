@@ -9,5 +9,4 @@ class CreateWeekdays < ActiveRecord::Migration[7.0]
   def self.down
     drop_table :weekdays
   end
-
 end

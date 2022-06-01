@@ -9,5 +9,4 @@ class CreateConfigurations < ActiveRecord::Migration[7.0]
   def self.down
     drop_table :configurations
   end
-
 end

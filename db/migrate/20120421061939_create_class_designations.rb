@@ -1,8 +1,8 @@
 class CreateClassDesignations < ActiveRecord::Migration[7.0]
   def self.up
     create_table :class_designations do |t|
-      t.string :name, :null => false
-      t.decimal :cgpa, :precision => 15, :scale => 2
+      t.string :name, null: false
+      t.decimal :cgpa, precision: 15, scale: 2
 
       t.timestamps
     end

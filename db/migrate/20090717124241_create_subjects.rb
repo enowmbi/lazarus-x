@@ -4,10 +4,10 @@ class CreateSubjects < ActiveRecord::Migration[7.0]
       t.string     :name
       t.string     :code
       t.references :batch
-      t.boolean    :no_exams, :default=>false
+      t.boolean    :no_exams, default: false
       t.integer    :max_weekly_classes
       t.references :elective_group
-      t.boolean    :is_deleted, :default => false
+      t.boolean    :is_deleted, default: false
       t.timestamps
     end
   end
@@ -15,5 +15,4 @@ class CreateSubjects < ActiveRecord::Migration[7.0]
   def self.down
     drop_table :subjects
   end
-
 end

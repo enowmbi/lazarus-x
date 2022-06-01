@@ -12,5 +12,4 @@ class CreateSchoolDetails < ActiveRecord::Migration[7.0]
   def self.down
     drop_table :school_details
   end
-
 end

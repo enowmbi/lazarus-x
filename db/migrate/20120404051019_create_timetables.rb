@@ -3,7 +3,7 @@ class CreateTimetables < ActiveRecord::Migration[7.0]
     create_table :timetables do |t|
       t.date     :start_date
       t.date     :end_date
-      t.boolean      :is_active,:default=>false
+      t.boolean :is_active, default: false
       t.timestamps
     end
   end

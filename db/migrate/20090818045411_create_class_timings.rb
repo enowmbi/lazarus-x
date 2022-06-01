@@ -7,10 +7,9 @@ class CreateClassTimings < ActiveRecord::Migration[7.0]
       t.time       :end_time
       t.boolean    :is_break
     end
-    end
+  end
 
   def self.down
     drop_table :class_timings
   end
-  
 end

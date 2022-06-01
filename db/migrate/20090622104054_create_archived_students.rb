@@ -32,14 +32,14 @@ class CreateArchivedStudents < ActiveRecord::Migration[7.0]
 
       t.string     :photo_filename
       t.string     :photo_content_type
-      t.binary     :photo_data, :limit => 5.megabytes
+      t.binary     :photo_data, limit: 5.megabytes
 
       t.string     :status_description
-      t.boolean    :is_active, :default => true
-      t.boolean    :is_deleted, :default => false
+      t.boolean    :is_active, default: true
+      t.boolean    :is_deleted, default: false
 
       t.references :immediate_contact
-      t.boolean    :is_sms_enabled, :default=>true
+      t.boolean    :is_sms_enabled, default: true
       t.string :former_id
 
       t.timestamps
@@ -49,5 +49,4 @@ class CreateArchivedStudents < ActiveRecord::Migration[7.0]
   def self.down
     drop_table :archived_students
   end
-
 end

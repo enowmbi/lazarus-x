@@ -3,7 +3,7 @@ class CreateEmployeeBankDetails < ActiveRecord::Migration[7.0]
     create_table :employee_bank_details do |t|
       t.references :employee
       t.references :bank_field
-      t.string      :bank_info
+      t.string :bank_info
     end
   end
 

@@ -3,12 +3,12 @@ class CreateFinanceFeeParticulars < ActiveRecord::Migration[7.0]
     create_table :finance_fee_particulars do |t|
       t.string      :name
       t.text        :description
-      t.decimal     :amount, :precision => 12, :scale => 2
+      t.decimal     :amount, precision: 12, scale: 2
       t.references  :finance_fee_category
       t.references  :student_category
       t.string      :admission_no
       t.references  :student
-      t.boolean     :is_deleted, :null => false, :default => false
+      t.boolean     :is_deleted, null: false, default: false
       t.timestamps
     end
   end

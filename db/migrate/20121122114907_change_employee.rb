@@ -4,6 +4,6 @@ class ChangeEmployee < ActiveRecord::Migration[7.0]
   end
 
   def self.down
-  #change_column :employees, :gender, :boolean
+    # change_column :employees, :gender, :boolean
   end
 end

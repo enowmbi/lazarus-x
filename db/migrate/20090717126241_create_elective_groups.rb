@@ -3,7 +3,7 @@ class CreateElectiveGroups < ActiveRecord::Migration[7.0]
     create_table :elective_groups do |t|
       t.string     :name
       t.references :batch
-      t.boolean    :is_deleted, :default => false
+      t.boolean    :is_deleted, default: false
       t.timestamps
     end
   end

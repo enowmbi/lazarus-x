@@ -3,7 +3,7 @@ class CreateFinanceDonations < ActiveRecord::Migration[7.0]
     create_table :finance_donations do |t|
       t.string     :donor
       t.string     :description
-      t.decimal    :amount, :precision => 15, :scale => 2
+      t.decimal    :amount, precision: 15, scale: 2
       t.references :transaction
       t.timestamps
     end
