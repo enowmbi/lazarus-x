@@ -76,6 +76,7 @@ group :development do
   # Add gems for security checks
   gem "brakeman"
   gem "bundler-audit"
+  gem "ruby_audit"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
