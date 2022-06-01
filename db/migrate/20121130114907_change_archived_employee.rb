@@ -1,4 +1,4 @@
-class ChangeArchivedEmployee < ActiveRecord::Migration
+class ChangeArchivedEmployee < ActiveRecord::Migration[7.0]
   def self.up
     change_column :archived_employees, :gender, :string
   end

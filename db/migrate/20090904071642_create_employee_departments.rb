@@ -1,4 +1,4 @@
-class CreateEmployeeDepartments < ActiveRecord::Migration
+class CreateEmployeeDepartments < ActiveRecord::Migration[7.0]
   def self.up
     create_table :employee_departments do |t|
       t.string  :code

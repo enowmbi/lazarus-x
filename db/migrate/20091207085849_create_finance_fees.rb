@@ -1,4 +1,4 @@
-class CreateFinanceFees < ActiveRecord::Migration
+class CreateFinanceFees < ActiveRecord::Migration[7.0]
   def self.up
     create_table :finance_fees do |t|
       t.references :fee_collection

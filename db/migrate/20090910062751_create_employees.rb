@@ -1,4 +1,4 @@
-class CreateEmployees < ActiveRecord::Migration
+class CreateEmployees < ActiveRecord::Migration[7.0]
   def self.up
     create_table :employees do |t|
       t.references :employee_category

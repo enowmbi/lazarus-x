@@ -1,4 +1,4 @@
-class CreateSmsLogs < ActiveRecord::Migration
+class CreateSmsLogs < ActiveRecord::Migration[7.0]
   def self.up
     create_table :sms_logs do |t|
       t.string   :mobile

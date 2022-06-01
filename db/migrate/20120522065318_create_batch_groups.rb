@@ -1,4 +1,4 @@
-class CreateBatchGroups < ActiveRecord::Migration
+class CreateBatchGroups < ActiveRecord::Migration[7.0]
   def self.up
     create_table :batch_groups do |t|
       t.integer :course_id

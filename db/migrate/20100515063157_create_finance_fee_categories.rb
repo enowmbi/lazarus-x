@@ -1,4 +1,4 @@
-class CreateFinanceFeeCategories < ActiveRecord::Migration
+class CreateFinanceFeeCategories < ActiveRecord::Migration[7.0]
   def self.up
     create_table :finance_fee_categories do |t|
       t.string      :name

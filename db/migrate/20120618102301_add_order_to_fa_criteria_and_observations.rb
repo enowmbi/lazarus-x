@@ -1,4 +1,4 @@
-class AddOrderToFaCriteriaAndObservations < ActiveRecord::Migration
+class AddOrderToFaCriteriaAndObservations < ActiveRecord::Migration[7.0]
   def self.up
     add_column      :fa_criterias,    :sort_order,   :integer
     add_column      :observations,    :sort_order,   :integer

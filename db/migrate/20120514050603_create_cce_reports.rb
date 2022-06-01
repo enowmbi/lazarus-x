@@ -1,4 +1,4 @@
-class CreateCceReports < ActiveRecord::Migration
+class CreateCceReports < ActiveRecord::Migration[7.0]
   def self.up
     create_table :cce_reports do |t|
       t.integer       :observable_id

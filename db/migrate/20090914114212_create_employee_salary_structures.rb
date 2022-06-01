@@ -1,4 +1,4 @@
-class CreateEmployeeSalaryStructures < ActiveRecord::Migration
+class CreateEmployeeSalaryStructures < ActiveRecord::Migration[7.0]
   def self.up
     create_table :employee_salary_structures do |t|
       t.references :employee

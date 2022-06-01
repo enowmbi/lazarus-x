@@ -1,4 +1,4 @@
-class CreateFaGroupsSubjects < ActiveRecord::Migration
+class CreateFaGroupsSubjects < ActiveRecord::Migration[7.0]
   def self.up
     create_table :fa_groups_subjects, :id => false do |t|
       t.integer     :subject_id

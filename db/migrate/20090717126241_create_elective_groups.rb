@@ -1,4 +1,4 @@
-class CreateElectiveGroups < ActiveRecord::Migration
+class CreateElectiveGroups < ActiveRecord::Migration[7.0]
   def self.up
     create_table :elective_groups do |t|
       t.string     :name

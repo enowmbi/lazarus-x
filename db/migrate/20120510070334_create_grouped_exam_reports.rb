@@ -1,4 +1,4 @@
-class CreateGroupedExamReports < ActiveRecord::Migration
+class CreateGroupedExamReports < ActiveRecord::Migration[7.0]
   def self.up
     create_table :grouped_exam_reports do |t|
       t.integer :batch_id

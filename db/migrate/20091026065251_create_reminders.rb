@@ -1,4 +1,4 @@
-class CreateReminders < ActiveRecord::Migration
+class CreateReminders < ActiveRecord::Migration[7.0]
   def self.up
     create_table :reminders do |t|
       t.integer  :sender

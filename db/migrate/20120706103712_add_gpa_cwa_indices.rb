@@ -1,4 +1,4 @@
-class AddGpaCwaIndices < ActiveRecord::Migration
+class AddGpaCwaIndices < ActiveRecord::Migration[7.0]
   def self.up
 	add_index :grouped_exams,[:batch_id,:exam_group_id]
 	add_index :previous_exam_scores,[:student_id,:exam_id]

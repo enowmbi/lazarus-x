@@ -1,4 +1,4 @@
-class AddTimetableIdToTimetableEntries < ActiveRecord::Migration
+class AddTimetableIdToTimetableEntries < ActiveRecord::Migration[7.0]
   def self.up
     add_column  :timetable_entries, :timetable_id, :integer
   end

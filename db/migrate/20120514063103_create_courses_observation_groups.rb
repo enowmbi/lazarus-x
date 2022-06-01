@@ -1,4 +1,4 @@
-class CreateCoursesObservationGroups < ActiveRecord::Migration
+class CreateCoursesObservationGroups < ActiveRecord::Migration[7.0]
   def self.up
     create_table :courses_observation_groups, :id => false do |t|
       t.integer     :course_id

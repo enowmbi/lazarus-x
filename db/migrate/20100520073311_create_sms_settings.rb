@@ -1,4 +1,4 @@
-class CreateSmsSettings < ActiveRecord::Migration
+class CreateSmsSettings < ActiveRecord::Migration[7.0]
   def self.up
     create_table :sms_settings do |t|
       t.string :settings_key

@@ -1,4 +1,4 @@
-class CreateStudentAdditionalDetails < ActiveRecord::Migration
+class CreateStudentAdditionalDetails < ActiveRecord::Migration[7.0]
   def self.up
     create_table :student_additional_details do |t|
       t.references :student

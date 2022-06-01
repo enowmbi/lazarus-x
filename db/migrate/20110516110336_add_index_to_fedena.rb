@@ -1,4 +1,4 @@
-class AddIndexToFedena < ActiveRecord::Migration
+class AddIndexToFedena < ActiveRecord::Migration[7.0]
   def self.up
       add_index :users, [:username],:limit => 10
       add_index :finance_fee_collections, [:fee_category_id]

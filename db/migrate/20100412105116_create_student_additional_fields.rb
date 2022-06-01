@@ -1,4 +1,4 @@
-class CreateStudentAdditionalFields < ActiveRecord::Migration
+class CreateStudentAdditionalFields < ActiveRecord::Migration[7.0]
   def self.up
     create_table :student_additional_fields do |t|
       t.string :name

@@ -1,4 +1,4 @@
-class CreateObservations < ActiveRecord::Migration
+class CreateObservations < ActiveRecord::Migration[7.0]
   def self.up
     create_table :observations do |t|
       t.string          :name

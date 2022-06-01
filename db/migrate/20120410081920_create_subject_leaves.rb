@@ -1,4 +1,4 @@
-class CreateSubjectLeaves < ActiveRecord::Migration
+class CreateSubjectLeaves < ActiveRecord::Migration[7.0]
   def self.up
     create_table :subject_leaves do |t|
       t.integer     :student_id

@@ -1,4 +1,4 @@
-class CreateArchivedStudents < ActiveRecord::Migration
+class CreateArchivedStudents < ActiveRecord::Migration[7.0]
   def self.up
     create_table :archived_students do |t|
       t.string     :admission_no

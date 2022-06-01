@@ -1,4 +1,4 @@
-class CreateCceWeightages < ActiveRecord::Migration
+class CreateCceWeightages < ActiveRecord::Migration[7.0]
   def self.up
     create_table :cce_weightages do |t|
       t.integer     :weightage

@@ -1,4 +1,4 @@
-class CreateEmployeeAdditionalDetails < ActiveRecord::Migration
+class CreateEmployeeAdditionalDetails < ActiveRecord::Migration[7.0]
   def self.up
     create_table :employee_additional_details do |t|
       t.references :employee

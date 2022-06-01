@@ -1,4 +1,4 @@
-class AddBatchIdToAttendanceAndSubjectLeave < ActiveRecord::Migration
+class AddBatchIdToAttendanceAndSubjectLeave < ActiveRecord::Migration[7.0]
   def self.up
     add_column :attendances, :batch_id, :integer
     add_column :subject_leaves, :batch_id, :integer

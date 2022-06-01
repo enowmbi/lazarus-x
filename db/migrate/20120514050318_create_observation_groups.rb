@@ -1,4 +1,4 @@
-class CreateObservationGroups < ActiveRecord::Migration
+class CreateObservationGroups < ActiveRecord::Migration[7.0]
   def self.up
     create_table :observation_groups do |t|
       t.string        :name

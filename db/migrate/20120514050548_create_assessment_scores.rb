@@ -1,4 +1,4 @@
-class CreateAssessmentScores < ActiveRecord::Migration
+class CreateAssessmentScores < ActiveRecord::Migration[7.0]
   def self.up
     create_table :assessment_scores do |t|
       t.integer       :student_id

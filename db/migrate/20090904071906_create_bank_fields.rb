@@ -1,4 +1,4 @@
-class CreateBankFields < ActiveRecord::Migration
+class CreateBankFields < ActiveRecord::Migration[7.0]
   def self.up
     create_table :bank_fields do |t|
       t.string :name

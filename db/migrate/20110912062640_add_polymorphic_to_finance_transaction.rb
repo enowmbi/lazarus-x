@@ -1,4 +1,4 @@
-class AddPolymorphicToFinanceTransaction < ActiveRecord::Migration
+class AddPolymorphicToFinanceTransaction < ActiveRecord::Migration[7.0]
   def self.up
     add_column :finance_transactions, :finance_id,  :integer
     add_column :finance_transactions, :finance_type,:string

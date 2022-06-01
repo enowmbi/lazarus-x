@@ -1,4 +1,4 @@
-class CreateArchivedExamScores < ActiveRecord::Migration
+class CreateArchivedExamScores < ActiveRecord::Migration[7.0]
   def self.up
     create_table :archived_exam_scores do |t|
       t.references :student

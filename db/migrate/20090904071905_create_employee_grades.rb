@@ -1,4 +1,4 @@
-class CreateEmployeeGrades < ActiveRecord::Migration
+class CreateEmployeeGrades < ActiveRecord::Migration[7.0]
   def self.up
     create_table :employee_grades do |t|
       t.string :name

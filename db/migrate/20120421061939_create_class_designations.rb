@@ -1,4 +1,4 @@
-class CreateClassDesignations < ActiveRecord::Migration
+class CreateClassDesignations < ActiveRecord::Migration[7.0]
   def self.up
     create_table :class_designations do |t|
       t.string :name, :null => false

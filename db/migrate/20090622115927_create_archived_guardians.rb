@@ -1,4 +1,4 @@
-class CreateArchivedGuardians < ActiveRecord::Migration
+class CreateArchivedGuardians < ActiveRecord::Migration[7.0]
   def self.up
     create_table :archived_guardians do |t|
       t.references :ward

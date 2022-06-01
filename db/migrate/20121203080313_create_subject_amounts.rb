@@ -1,4 +1,4 @@
-class CreateSubjectAmounts < ActiveRecord::Migration
+class CreateSubjectAmounts < ActiveRecord::Migration[7.0]
   def self.up
     create_table :subject_amounts do |t|
       t.references :course

@@ -1,4 +1,4 @@
-class CreatePayrollCategories < ActiveRecord::Migration
+class CreatePayrollCategories < ActiveRecord::Migration[7.0]
   def self.up
     create_table :payroll_categories do |t|
       t.string :name

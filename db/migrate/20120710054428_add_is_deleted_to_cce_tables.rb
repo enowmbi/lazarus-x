@@ -1,4 +1,4 @@
-class AddIsDeletedToCceTables < ActiveRecord::Migration
+class AddIsDeletedToCceTables < ActiveRecord::Migration[7.0]
   def self.up
     add_column  :observation_groups,  :is_deleted,  :boolean,:default=>false
     add_column  :fa_criterias,  :is_deleted,  :boolean,:default=>false

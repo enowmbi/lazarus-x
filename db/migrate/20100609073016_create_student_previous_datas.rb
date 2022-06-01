@@ -1,4 +1,4 @@
-class CreateStudentPreviousDatas < ActiveRecord::Migration
+class CreateStudentPreviousDatas < ActiveRecord::Migration[7.0]
   def self.up
     create_table :student_previous_datas do |t|
       t.references :student

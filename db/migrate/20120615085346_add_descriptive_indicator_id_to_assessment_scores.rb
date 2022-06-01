@@ -1,4 +1,4 @@
-class AddDescriptiveIndicatorIdToAssessmentScores < ActiveRecord::Migration
+class AddDescriptiveIndicatorIdToAssessmentScores < ActiveRecord::Migration[7.0]
   def self.up
     add_column    :assessment_scores,   :descriptive_indicator_id,  :integer
     remove_column :assessment_scores,   :assessment_tool_id

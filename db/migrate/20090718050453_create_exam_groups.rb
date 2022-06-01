@@ -1,4 +1,4 @@
-class CreateExamGroups < ActiveRecord::Migration
+class CreateExamGroups < ActiveRecord::Migration[7.0]
   def self.up
     create_table :exam_groups do |t|
       t.string     :name

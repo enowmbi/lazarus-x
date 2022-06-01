@@ -1,4 +1,4 @@
-class CreateWeekdays < ActiveRecord::Migration
+class CreateWeekdays < ActiveRecord::Migration[7.0]
   def self.up
     create_table :weekdays do |t|
       t.references :batch

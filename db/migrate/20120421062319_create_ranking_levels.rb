@@ -1,4 +1,4 @@
-class CreateRankingLevels < ActiveRecord::Migration
+class CreateRankingLevels < ActiveRecord::Migration[7.0]
   def self.up
     create_table :ranking_levels do |t|
       t.string :name, :null => false

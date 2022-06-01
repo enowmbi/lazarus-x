@@ -1,4 +1,4 @@
-class CreateNews < ActiveRecord::Migration
+class CreateNews < ActiveRecord::Migration[7.0]
   def self.up
     create_table :news do |t|
       t.string     :title

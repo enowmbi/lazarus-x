@@ -1,4 +1,4 @@
-class CreateDescriptiveIndicators < ActiveRecord::Migration
+class CreateDescriptiveIndicators < ActiveRecord::Migration[7.0]
   def self.up
     create_table :descriptive_indicators do |t|
       t.string        :name

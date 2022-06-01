@@ -1,4 +1,4 @@
-class AddUserIdToStudentsEmployees < ActiveRecord::Migration
+class AddUserIdToStudentsEmployees < ActiveRecord::Migration[7.0]
   def self.up
     add_column :students,:user_id,:integer
     add_column :employees,:user_id,:integer

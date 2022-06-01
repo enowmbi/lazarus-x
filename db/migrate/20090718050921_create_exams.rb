@@ -1,4 +1,4 @@
-class CreateExams < ActiveRecord::Migration
+class CreateExams < ActiveRecord::Migration[7.0]
   def self.up
     create_table :exams do |t|
       t.references :exam_group

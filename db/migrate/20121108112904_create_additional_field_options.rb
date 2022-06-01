@@ -1,4 +1,4 @@
-class CreateAdditionalFieldOptions < ActiveRecord::Migration
+class CreateAdditionalFieldOptions < ActiveRecord::Migration[7.0]
   def self.up
     create_table :additional_field_options do |t|
       t.integer :additional_field_id

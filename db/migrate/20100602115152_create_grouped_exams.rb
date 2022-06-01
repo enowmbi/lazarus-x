@@ -1,4 +1,4 @@
-class CreateGroupedExams < ActiveRecord::Migration
+class CreateGroupedExams < ActiveRecord::Migration[7.0]
   def self.up
     create_table :grouped_exams do |t|
       t.references :exam_group

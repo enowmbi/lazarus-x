@@ -1,4 +1,4 @@
-class CreateAttendances < ActiveRecord::Migration
+class CreateAttendances < ActiveRecord::Migration[7.0]
   def self.up
     create_table :attendances do |t|
       t.references :student

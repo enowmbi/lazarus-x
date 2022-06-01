@@ -1,4 +1,4 @@
-class CreateEmployeeLeaveTypes < ActiveRecord::Migration
+class CreateEmployeeLeaveTypes < ActiveRecord::Migration[7.0]
   def self.up
     create_table :employee_leave_types do |t|
       t.string   :name

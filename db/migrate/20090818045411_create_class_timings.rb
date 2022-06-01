@@ -1,4 +1,4 @@
-class CreateClassTimings < ActiveRecord::Migration
+class CreateClassTimings < ActiveRecord::Migration[7.0]
   def self.up
     create_table :class_timings do |t|
       t.references :batch

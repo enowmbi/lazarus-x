@@ -1,4 +1,4 @@
-class CreateFaGroups < ActiveRecord::Migration
+class CreateFaGroups < ActiveRecord::Migration[7.0]
   def self.up
     create_table :fa_groups do |t|
       t.string      :name

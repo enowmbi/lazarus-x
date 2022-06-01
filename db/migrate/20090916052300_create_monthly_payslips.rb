@@ -1,4 +1,4 @@
-class CreateMonthlyPayslips < ActiveRecord::Migration
+class CreateMonthlyPayslips < ActiveRecord::Migration[7.0]
   def self.up
     create_table :monthly_payslips do |t|
       t.date     :salary_date

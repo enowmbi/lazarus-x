@@ -1,4 +1,4 @@
-class CreateCoursesAndBatches < ActiveRecord::Migration
+class CreateCoursesAndBatches < ActiveRecord::Migration[7.0]
   def self.up
     create_table :courses do |t|
       t.string     :course_name

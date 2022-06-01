@@ -1,4 +1,4 @@
-class CreateCceWeightagesCourses < ActiveRecord::Migration
+class CreateCceWeightagesCourses < ActiveRecord::Migration[7.0]
     def self.up
     create_table :cce_weightages_courses, :id => false do |t|
       t.integer     :cce_weightage_id

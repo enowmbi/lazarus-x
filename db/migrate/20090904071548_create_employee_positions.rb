@@ -1,4 +1,4 @@
-class CreateEmployeePositions < ActiveRecord::Migration
+class CreateEmployeePositions < ActiveRecord::Migration[7.0]
   def self.up
     create_table :employee_positions do |t|
       t.string  :name

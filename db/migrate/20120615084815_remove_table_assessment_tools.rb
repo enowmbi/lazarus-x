@@ -1,4 +1,4 @@
-class RemoveTableAssessmentTools < ActiveRecord::Migration
+class RemoveTableAssessmentTools < ActiveRecord::Migration[7.0]
   def self.up
     drop_table :assessment_tools
   end

@@ -1,4 +1,4 @@
-class AddCceEnabledToCourses < ActiveRecord::Migration
+class AddCceEnabledToCourses < ActiveRecord::Migration[7.0]
   def self.up
     add_column  :courses,:cce_enabled,:boolean
   end

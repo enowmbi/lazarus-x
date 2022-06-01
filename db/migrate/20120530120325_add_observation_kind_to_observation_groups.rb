@@ -1,4 +1,4 @@
-class AddObservationKindToObservationGroups < ActiveRecord::Migration
+class AddObservationKindToObservationGroups < ActiveRecord::Migration[7.0]
   def self.up
     add_column :observation_groups, :observation_kind, :string
   end

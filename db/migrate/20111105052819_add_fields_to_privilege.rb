@@ -1,4 +1,4 @@
-class AddFieldsToPrivilege < ActiveRecord::Migration
+class AddFieldsToPrivilege < ActiveRecord::Migration[7.0]
   def self.up
     add_column :privileges, :description, :text
     create_defaults

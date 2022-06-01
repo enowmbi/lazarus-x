@@ -1,4 +1,4 @@
-class AddUserIdToArchivedStudents < ActiveRecord::Migration
+class AddUserIdToArchivedStudents < ActiveRecord::Migration[7.0]
   def self.up
     add_column :archived_students, :user_id, :integer
   end

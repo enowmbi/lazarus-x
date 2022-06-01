@@ -1,4 +1,4 @@
-class AddIndexToFedena2 < ActiveRecord::Migration
+class AddIndexToFedena2 < ActiveRecord::Migration[7.0]
   def self.up
     add_index :reminders, [:recipient]
     add_index :students, [:admission_no],:limit => 10

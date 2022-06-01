@@ -1,4 +1,4 @@
-class CreateConfigurations < ActiveRecord::Migration
+class CreateConfigurations < ActiveRecord::Migration[7.0]
   def self.up
     create_table :configurations do |t|
       t.string :config_key

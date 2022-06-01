@@ -1,4 +1,4 @@
-class AddColumnsToPrivileges < ActiveRecord::Migration
+class AddColumnsToPrivileges < ActiveRecord::Migration[7.0]
   def self.up
     add_column :privileges, :privilege_tag_id, :int
     add_column :privileges, :priority, :int

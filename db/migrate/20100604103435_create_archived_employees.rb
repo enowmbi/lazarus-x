@@ -1,4 +1,4 @@
-class CreateArchivedEmployees < ActiveRecord::Migration
+class CreateArchivedEmployees < ActiveRecord::Migration[7.0]
   def self.up
     create_table :archived_employees do |t|
       t.references :employee_category

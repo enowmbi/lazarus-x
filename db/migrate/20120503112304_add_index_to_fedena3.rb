@@ -1,4 +1,4 @@
-class AddIndexToFedena3 < ActiveRecord::Migration
+class AddIndexToFedena3 < ActiveRecord::Migration[7.0]
   def self.up
     remove_index :timetable_entries,:name => 'by_timetable'
     remove_index :batches,[:is_deleted,:is_active]

@@ -1,4 +1,4 @@
-class AddRecieptAndVoucherNoToFinanceTransaction < ActiveRecord::Migration
+class AddRecieptAndVoucherNoToFinanceTransaction < ActiveRecord::Migration[7.0]
   def self.up
     add_column :finance_transactions, :receipt_no,  :string
     add_column :finance_transactions, :voucher_no,  :string

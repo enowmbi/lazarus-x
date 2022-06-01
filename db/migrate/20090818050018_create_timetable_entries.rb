@@ -1,4 +1,4 @@
-class CreateTimetableEntries < ActiveRecord::Migration
+class CreateTimetableEntries < ActiveRecord::Migration[7.0]
   def self.up
     create_table :timetable_entries do |t|
       t.references :batch

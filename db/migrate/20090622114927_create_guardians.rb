@@ -1,4 +1,4 @@
-class CreateGuardians < ActiveRecord::Migration
+class CreateGuardians < ActiveRecord::Migration[7.0]
   def self.up
     create_table :guardians do |t|
       t.references :ward

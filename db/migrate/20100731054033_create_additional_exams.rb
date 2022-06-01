@@ -1,4 +1,4 @@
-class CreateAdditionalExams < ActiveRecord::Migration
+class CreateAdditionalExams < ActiveRecord::Migration[7.0]
   def self.up
     create_table :additional_exams do |t|
       t.references :additional_exam_group

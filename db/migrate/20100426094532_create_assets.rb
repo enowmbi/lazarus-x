@@ -1,4 +1,4 @@
-class CreateAssets < ActiveRecord::Migration
+class CreateAssets < ActiveRecord::Migration[7.0]
   def self.up
     create_table :assets do |t|
       t.string :title

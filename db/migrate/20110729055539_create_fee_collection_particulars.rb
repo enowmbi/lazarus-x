@@ -1,4 +1,4 @@
-class CreateFeeCollectionParticulars < ActiveRecord::Migration
+class CreateFeeCollectionParticulars < ActiveRecord::Migration[7.0]
   def self.up
     create_table :fee_collection_particulars do |t|
       

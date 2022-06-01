@@ -1,4 +1,4 @@
-class CreateArchivedEmployeeSalaryStructures < ActiveRecord::Migration
+class CreateArchivedEmployeeSalaryStructures < ActiveRecord::Migration[7.0]
   def self.up
     create_table :archived_employee_salary_structures do |t|
       t.references :employee

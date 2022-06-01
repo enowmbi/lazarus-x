@@ -1,4 +1,4 @@
-class CreateFinanceTransactionTriggers < ActiveRecord::Migration
+class CreateFinanceTransactionTriggers < ActiveRecord::Migration[7.0]
   def self.up
     create_table :finance_transaction_triggers do |t|
       t.references :finance_category

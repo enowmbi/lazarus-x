@@ -1,4 +1,4 @@
-class CreateFaCriterias < ActiveRecord::Migration
+class CreateFaCriterias < ActiveRecord::Migration[7.0]
   def self.up
     create_table :fa_criterias do |t|
       t.string  :fa_name

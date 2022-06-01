@@ -1,4 +1,4 @@
-class AddFieldsToAdditionalFields < ActiveRecord::Migration
+class AddFieldsToAdditionalFields < ActiveRecord::Migration[7.0]
   def self.up
 	add_column :additional_fields, :is_mandatory, :boolean, :default=>false
     add_column :additional_fields, :input_type, :string

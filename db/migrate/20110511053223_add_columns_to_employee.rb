@@ -1,4 +1,4 @@
-class AddColumnsToEmployee < ActiveRecord::Migration
+class AddColumnsToEmployee < ActiveRecord::Migration[7.0]
     def self.up
         add_column    :archived_employees, :photo_file_size, :integer
         rename_column :archived_employees, :photo_filename, :photo_file_name

@@ -1,4 +1,4 @@
-class AddCceExamCategoryIdToExamGroups < ActiveRecord::Migration
+class AddCceExamCategoryIdToExamGroups < ActiveRecord::Migration[7.0]
   def self.up
     add_column :exam_groups, :cce_exam_category_id, :integer
   end

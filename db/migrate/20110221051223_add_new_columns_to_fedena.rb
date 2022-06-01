@@ -1,4 +1,4 @@
-class AddNewColumnsToFedena < ActiveRecord::Migration
+class AddNewColumnsToFedena < ActiveRecord::Migration[7.0]
   def self.up
     add_column :students,  :has_paid_fees, :boolean, :default => false
     add_column :batches,  :employee_id, :string

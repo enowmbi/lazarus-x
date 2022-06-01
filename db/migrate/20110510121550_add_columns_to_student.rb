@@ -1,4 +1,4 @@
-class AddColumnsToStudent < ActiveRecord::Migration
+class AddColumnsToStudent < ActiveRecord::Migration[7.0]
     def self.up
         add_column    :archived_students, :photo_file_size, :integer
         rename_column :archived_students, :photo_filename, :photo_file_name

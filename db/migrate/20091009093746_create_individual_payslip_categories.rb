@@ -1,4 +1,4 @@
-class CreateIndividualPayslipCategories < ActiveRecord::Migration
+class CreateIndividualPayslipCategories < ActiveRecord::Migration[7.0]
   def self.up
     create_table :individual_payslip_categories do |t|
       t.references :employee

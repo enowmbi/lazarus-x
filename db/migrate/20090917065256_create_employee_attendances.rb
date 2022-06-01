@@ -1,4 +1,4 @@
-class CreateEmployeeAttendances < ActiveRecord::Migration
+class CreateEmployeeAttendances < ActiveRecord::Migration[7.0]
   def self.up
     create_table :employee_attendances do |t|
       t.date       :attendance_date

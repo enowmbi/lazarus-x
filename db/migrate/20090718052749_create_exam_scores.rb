@@ -1,4 +1,4 @@
-class CreateExamScores < ActiveRecord::Migration
+class CreateExamScores < ActiveRecord::Migration[7.0]
   def self.up
     create_table :exam_scores do |t|
       t.references :student

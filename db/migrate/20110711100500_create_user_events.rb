@@ -1,4 +1,4 @@
-class CreateUserEvents < ActiveRecord::Migration
+class CreateUserEvents < ActiveRecord::Migration[7.0]
 
   def self.up
     create_table :user_events do |t|

@@ -1,4 +1,4 @@
-class CreateStudentPreviousSubjectMarks < ActiveRecord::Migration
+class CreateStudentPreviousSubjectMarks < ActiveRecord::Migration[7.0]
   def self.up
     create_table :student_previous_subject_marks do |t|
       t.references :student

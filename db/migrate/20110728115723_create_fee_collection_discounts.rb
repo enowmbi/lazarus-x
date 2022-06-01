@@ -1,4 +1,4 @@
-class CreateFeeCollectionDiscounts < ActiveRecord::Migration
+class CreateFeeCollectionDiscounts < ActiveRecord::Migration[7.0]
   def self.up
     create_table :fee_collection_discounts do |t|
       t.string     :type

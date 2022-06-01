@@ -1,4 +1,4 @@
-class AddCceIndices < ActiveRecord::Migration
+class AddCceIndices < ActiveRecord::Migration[7.0]
   def self.up
     table_indexes = [
       {:cce_grades=>[:cce_grade_set_id]},

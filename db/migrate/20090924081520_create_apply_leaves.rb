@@ -1,4 +1,4 @@
-class CreateApplyLeaves < ActiveRecord::Migration
+class CreateApplyLeaves < ActiveRecord::Migration[7.0]
   def self.up
     create_table :apply_leaves do |t|
       t.references  :employee

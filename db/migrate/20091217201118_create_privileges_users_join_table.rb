@@ -1,4 +1,4 @@
-class CreatePrivilegesUsersJoinTable < ActiveRecord::Migration
+class CreatePrivilegesUsersJoinTable < ActiveRecord::Migration[7.0]
   def self.up
     create_table :privileges_users, :id => false do |t|
       t.references(:user)

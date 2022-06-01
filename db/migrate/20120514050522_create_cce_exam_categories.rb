@@ -1,4 +1,4 @@
-class CreateCceExamCategories < ActiveRecord::Migration
+class CreateCceExamCategories < ActiveRecord::Migration[7.0]
   def self.up
     create_table :cce_exam_categories do |t|
       t.string      :name

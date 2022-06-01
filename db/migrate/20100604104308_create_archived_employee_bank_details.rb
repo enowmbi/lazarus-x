@@ -1,4 +1,4 @@
-class CreateArchivedEmployeeBankDetails < ActiveRecord::Migration
+class CreateArchivedEmployeeBankDetails < ActiveRecord::Migration[7.0]
   def self.up
     create_table :archived_employee_bank_details do |t|
       t.references :employee

@@ -1,4 +1,4 @@
-class RemoveGradingTypeFromBatches < ActiveRecord::Migration
+class RemoveGradingTypeFromBatches < ActiveRecord::Migration[7.0]
   def self.up
 	remove_column :batches, :grading_type
   end

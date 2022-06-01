@@ -1,4 +1,4 @@
-class CreateAdditionalExamScores < ActiveRecord::Migration
+class CreateAdditionalExamScores < ActiveRecord::Migration[7.0]
   def self.up
     create_table :additional_exam_scores do |t|
       t.references :student

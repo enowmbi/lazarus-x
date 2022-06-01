@@ -1,4 +1,4 @@
-class CreateStudentAdditionalFieldOptions < ActiveRecord::Migration
+class CreateStudentAdditionalFieldOptions < ActiveRecord::Migration[7.0]
   def self.up
     create_table :student_additional_field_options do |t|
       t.integer :student_additional_field_id

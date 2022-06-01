@@ -1,4 +1,4 @@
-class CreateFinanceDonations < ActiveRecord::Migration
+class CreateFinanceDonations < ActiveRecord::Migration[7.0]
   def self.up
     create_table :finance_donations do |t|
       t.string     :donor

@@ -1,4 +1,4 @@
-class CreateSchoolDetails < ActiveRecord::Migration
+class CreateSchoolDetails < ActiveRecord::Migration[7.0]
   def self.up
     create_table :school_details do |t|
       t.integer :school_id

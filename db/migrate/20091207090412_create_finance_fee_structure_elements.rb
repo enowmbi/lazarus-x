@@ -1,4 +1,4 @@
-class CreateFinanceFeeStructureElements < ActiveRecord::Migration
+class CreateFinanceFeeStructureElements < ActiveRecord::Migration[7.0]
   def self.up
     create_table :finance_fee_structure_elements do |t|
       t.decimal    :amount, :precision => 12, :scale => 2

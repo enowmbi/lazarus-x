@@ -1,4 +1,4 @@
-class CreateSmsMessages < ActiveRecord::Migration
+class CreateSmsMessages < ActiveRecord::Migration[7.0]
   def self.up
     create_table :sms_messages do |t|
       t.string :body

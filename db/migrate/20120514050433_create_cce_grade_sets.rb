@@ -1,4 +1,4 @@
-class CreateCceGradeSets < ActiveRecord::Migration
+class CreateCceGradeSets < ActiveRecord::Migration[7.0]
   def self.up
     create_table :cce_grade_sets do |t|
       t.string      :name

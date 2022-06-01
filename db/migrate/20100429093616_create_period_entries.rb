@@ -1,4 +1,4 @@
-class CreatePeriodEntries < ActiveRecord::Migration
+class CreatePeriodEntries < ActiveRecord::Migration[7.0]
   def self.up
     create_table :period_entries do |t|
       t.date       :month_date

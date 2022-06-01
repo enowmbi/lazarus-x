@@ -1,4 +1,4 @@
-class CreateCceGrades < ActiveRecord::Migration
+class CreateCceGrades < ActiveRecord::Migration[7.0]
   def self.up
     create_table :cce_grades do |t|
       t.string    :name

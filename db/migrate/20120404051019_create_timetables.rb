@@ -1,4 +1,4 @@
-class CreateTimetables < ActiveRecord::Migration
+class CreateTimetables < ActiveRecord::Migration[7.0]
   def self.up
     create_table :timetables do |t|
       t.date     :start_date

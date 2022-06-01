@@ -1,4 +1,4 @@
-class CreateStudents < ActiveRecord::Migration
+class CreateStudents < ActiveRecord::Migration[7.0]
   def self.up
     create_table :students do |t|
       t.string     :admission_no
