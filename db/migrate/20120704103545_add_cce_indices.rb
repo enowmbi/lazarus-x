@@ -20,7 +20,7 @@ class AddCceIndices < ActiveRecord::Migration[7.0]
     add_index(:cce_weightages_courses,[:course_id,:cce_weightage_id],:name=>:index_for_join_table_cce_weightage_courses)
     add_index(:descriptive_indicators,[:describable_id,:describable_type,:sort_order],:name=>:describable_index)
     add_index(:assessment_scores,[:student_id,:batch_id,:descriptive_indicator_id,:exam_id],:name=>:score_index)
-    add_index(:fa_groups_subjects,[:fa_group_id,:subject_id],:name=>:score_index)
+    # add_index(:fa_groups_subjects,[:fa_group_id,:subject_id],:name=>:score_index)
   end
 
   def self.down
@@ -45,6 +45,6 @@ class AddCceIndices < ActiveRecord::Migration[7.0]
     remove_index(:cce_weightages_courses,:name=>:index_for_join_table_cce_weightage_courses)
     remove_index(:descriptive_indicators,:name=>:describable_index)
     remove_index(:assessment_scores,:name=>:score_index)
-    remove_index(:fa_groups_subjects,:name=>:score_index)
+    # remove_index(:fa_groups_subjects,:name=>:score_index)
   end
 end

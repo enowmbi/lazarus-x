@@ -12,7 +12,6 @@ class CreateAdditionalExams < ActiveRecord::Migration[7.0]
 
       t.references :event
       t.timestamps
-      t.timestamps
     end
   end
 
