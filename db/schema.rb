@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2013_01_10_095412) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_01_131736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2013_01_10_095412) do
     t.boolean "is_mandatory", default: false
     t.string "input_type"
     t.integer "priority"
+    t.index ["name"], name: "index_additional_fields_on_name", unique: true
   end
 
   create_table "apply_leaves", force: :cascade do |t|
