@@ -7,6 +7,8 @@ AllCops:
     - 'config.ru'
     - 'Gemfile'
     - 'Rakefile'
+    - 'vendor/bundle/**/*'
+
 
 
 Style/StringLiterals:
