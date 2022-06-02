@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_01_131736) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_02_001639) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_01_131736) do
     t.integer "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["additional_field_id"], name: "index_additional_field_options_on_additional_field_id"
   end
 
   create_table "additional_fields", force: :cascade do |t|
