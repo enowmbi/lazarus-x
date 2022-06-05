@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_02_001639) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_05_210349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -90,11 +90,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_02_001639) do
   end
 
   create_table "archived_employee_additional_details", force: :cascade do |t|
-    t.bigint "employee_id"
     t.bigint "additional_field_id"
     t.string "additional_info"
+    t.bigint "archived_employee_id"
     t.index ["additional_field_id"], name: "archived_emp_additional_details_additional_field"
-    t.index ["employee_id"], name: "archived_emp_additional_details_employee"
+    t.index ["archived_employee_id"], name: "archived_emp_additional_details_employee"
   end
 
   create_table "archived_employee_bank_details", force: :cascade do |t|
