@@ -18,10 +18,10 @@
 
 class UsersController < ApplicationController
   layout :choose_layout
-  before_filter :login_required, :except => [:forgot_password, :login, :set_new_password, :reset_password,:first_login_change_password]
-  before_filter :only_admin_allowed, :only => [:edit, :create, :index, :edit_privilege, :user_change_password,:delete,:list_user,:all]
-  before_filter :protect_user_data, :only => [:profile, :user_change_password]
-  before_filter :check_if_loggedin, :only => [:login]
+  before_action :login_required, :except => [:forgot_password, :login, :set_new_password, :reset_password,:first_login_change_password]
+  before_action :only_admin_allowed, :only => [:edit, :create, :index, :edit_privilege, :user_change_password,:delete,:list_user,:all]
+  before_action :protect_user_data, :only => [:profile, :user_change_password]
+  before_action :check_if_loggedin, :only => [:login]
   #  filter_access_to :edit_privilege
   def choose_layout
     return 'login' if action_name == 'login' or action_name == 'set_new_password'
