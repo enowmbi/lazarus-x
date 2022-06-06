@@ -267,11 +267,11 @@ class Batch < ApplicationRecord
   end
 
   def gpa_enabled?
-    Configuration.has_gpa? and self.grading_type=="1"
+    Configuration.gpa? and self.grading_type=="1"
   end
 
   def cwa_enabled?
-    Configuration.has_cwa? and self.grading_type=="2"
+    Configuration.cwa? and self.grading_type=="2"
   end
 
   def normal_enabled?

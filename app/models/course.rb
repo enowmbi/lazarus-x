@@ -108,11 +108,11 @@ class Course < ApplicationRecord
   end
 
   def gpa_enabled?
-    Configuration.has_gpa? and self.grading_type=="1"
+    Configuration.gpa? and self.grading_type=="1"
   end
 
   def cwa_enabled?
-    Configuration.has_cwa? and self.grading_type=="2"
+    Configuration.cwa? and self.grading_type=="2"
   end
 
   def normal_enabled?
@@ -139,7 +139,7 @@ class Course < ApplicationRecord
     def grading_types
       hsh =  ActiveSupport::OrderedHash.new
       hsh["0"]="Normal"
-      types = Configuration.get_grading_types
+      types = Configuration.grading_types
       types.each{|t| hsh[t] = GRADINGTYPES[t]}
       hsh
     end

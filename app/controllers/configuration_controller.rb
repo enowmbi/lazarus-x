@@ -28,12 +28,12 @@ class ConfigurationController < ApplicationController
         'StudentAttendanceType', 'CurrencyType', 'ExamResultType', 'AdmissionNumberAutoIncrement','EmployeeNumberAutoIncrement', \
         'NetworkState','Locale','FinancialYearStartDate','FinancialYearEndDate','EnableNewsCommentModeration','DefaultCountry','TimeZone','FirstTimeLoginEnable']
     @grading_types = Course::GRADINGTYPES
-    @enabled_grading_types = Configuration.get_grading_types
+    @enabled_grading_types = Configuration.grading_types
     @time_zones = TimeZone.all
     @school_detail = SchoolDetail.first || SchoolDetail.new
     @countries=Country.all
     if request.post?
-      Configuration.set_config_values(params[:configuration])
+      Configuration.config_values(params[:configuration])
       session[:language] = nil unless session[:language].nil?
       @school_detail.logo = params[:school_detail][:school_logo] if params[:school_detail].present?
       unless @school_detail.save
