@@ -17,7 +17,7 @@
 #limitations under the License.
 
 class Batch < ApplicationRecord
-  GRADINGTYPES = {"1"=>"GPA","2"=>"CWA","3"=>"CCE"}
+  GRADINGTYPES = { "1" => "GPA", "2" => "CWA", "3" => "CCE" }.freeze
 
   belongs_to :course
 
@@ -25,18 +25,18 @@ class Batch < ApplicationRecord
   has_many :grouped_exam_reports
   has_many :grouped_batches
   has_many :archived_students
-  has_many :grading_levels, :conditions => { :is_deleted => false }
-  has_many :subjects, :conditions => { :is_deleted => false }
+  has_many :grading_levels, ->{ where(is_deleted: false) }
+  has_many :subjects, -> { where(is_deleted: false) }
   has_many :employees_subjects, :through =>:subjects
   has_many :exam_groups
-  has_many :fee_category , :class_name => "FinanceFeeCategory"
+  has_many :fee_category, :class_name => "FinanceFeeCategory"
   has_many :elective_groups
   has_many :finance_fee_collections
   has_many :finance_transactions, :through => :students
   has_many :batch_events
-  has_many :events , :through =>:batch_events
-  has_many :batch_fee_discounts , :foreign_key => 'receiver_id'
-  has_many :student_category_fee_discounts , :foreign_key => 'receiver_id'
+  has_many :events, :through =>:batch_events
+  has_many :batch_fee_discounts, :foreign_key => 'receiver_id'
+  has_many :student_category_fee_discounts, :foreign_key => 'receiver_id'
   has_many :attendances
   has_many :subject_leaves
   has_many :timetable_entries
@@ -53,10 +53,33 @@ class Batch < ApplicationRecord
 
   attr_accessor :job_type
 
-  named_scope :active,{ :conditions => { :is_deleted => false, :is_active => true },:joins=>:course,:select=>"`batches`.*,CONCAT(courses.code,'-',batches.name) as course_full_name",:order=>"course_full_name"}
-  named_scope :inactive,{ :conditions => { :is_deleted => false, :is_active => false },:joins=>:course,:select=>"`batches`.*,CONCAT(courses.code,'-',batches.name) as course_full_name",:order=>"course_full_name"}
-  named_scope :deleted,{:conditions => { :is_deleted => true },:joins=>:course,:select=>"`batches`.*,CONCAT(courses.code,'-',batches.name) as course_full_name",:order=>"course_full_name"}
-  named_scope :cce, {:select => "batches.*",:joins => :course,:conditions=>["courses.grading_type = #{GRADINGTYPES.invert["CCE"]}"],:order=>:code}
+  scope :active, lambda{
+    where(is_deleted: false, is_active: true)
+      .joins(:course)
+      .select("`batches`.*,CONCAT(courses.code,'-',batches.name) as course_full_name")
+      .order("course_full_name")
+  }
+
+  scope :inactive, lambda {
+    where(is_deleted: false, is_active: false)
+      .joins(:course)
+      .select("`batches`.*,CONCAT(courses.code,'-',batches.name) as course_full_name")
+      .order("course_full_name")
+  }
+
+  scope :deleted, lambda {
+    where(is_deleted: true)
+      .joins(:course)
+      .select("`batches`.*,CONCAT(courses.code,'-',batches.name) as course_full_name")
+      .order("course_full_name")
+  }
+
+  scope :cce, lambda {
+    select("batches.*")
+      .joins(:course)
+      .where(["courses.grading_type = #{GRADINGTYPES.invert['CCE']}"])
+      .order(code: :desc)
+  }
 
   def validate
     errors.add(:start_date, "#{t('should_be_before_end_date')}.") \
@@ -685,6 +708,4 @@ class Batch < ApplicationRecord
   def user_is_authorized?(u)
     employees.collect(&:user_id).include? u.id
   end
-  
-  
 end

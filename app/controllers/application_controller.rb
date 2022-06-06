@@ -197,7 +197,7 @@ class ApplicationController < ActionController::Base
     if current_user.employee?
       employee = current_user.employee_record
       pri = Privilege.find(:all, select: "privilege_id",
-                                 conditions: "privileges_users.user_id = #{current_user.id}", joins: 'INNER JOIN `privileges_users` ON `privileges`.id = `privileges_users`.privilege_id')
+                           conditions: "privileges_users.user_id = #{current_user.id}", joins: 'INNER JOIN `privileges_users` ON `privileges`.id = `privileges_users`.privilege_id')
       #    privilege =[]
       #    pri.each do |p|
       #      privilege.push p.privilege_id
@@ -220,97 +220,96 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-end
 
-# reminder filters
-def protect_view_reminders
-  reminder = Reminder.find(params[:id2])
-  unless reminder.recipient == current_user.id
-    flash[:notice] = t('flash_msg5').to_s
-    redirect_to controller: "reminder", action: "index"
+  # reminder filters
+  def protect_view_reminders
+    reminder = Reminder.find(params[:id2])
+    unless reminder.recipient == current_user.id
+      flash[:notice] = t('flash_msg5').to_s
+      redirect_to controller: "reminder", action: "index"
+    end
   end
-end
 
-def protect_sent_reminders
-  reminder = Reminder.find(params[:id2])
-  unless reminder.sender == current_user.id
-    flash[:notice] = t('flash_msg5').to_s
-    redirect_to controller: "reminder", action: "index"
+  def protect_sent_reminders
+    reminder = Reminder.find(params[:id2])
+    unless reminder.sender == current_user.id
+      flash[:notice] = t('flash_msg5').to_s
+      redirect_to controller: "reminder", action: "index"
+    end
   end
-end
 
-# employee_leaves_filters
-def protect_leave_dashboard
-  employee = Employee.find(params[:id])
-  employee_user = employee.user
-  #    unless permitted_to? :employee_attendance_pdf, :employee_attendance
-  unless employee_user.id == current_user.id
-    flash[:notice] = t('flash_msg6').to_s
-    redirect_to controller: "user", action: "dashboard"
-    #    end
+  # employee_leaves_filters
+  def protect_leave_dashboard
+    employee = Employee.find(params[:id])
+    employee_user = employee.user
+    #    unless permitted_to? :employee_attendance_pdf, :employee_attendance
+    unless employee_user.id == current_user.id
+      flash[:notice] = t('flash_msg6').to_s
+      redirect_to controller: "user", action: "dashboard"
+      #    end
+    end
   end
-end
 
-def protect_applied_leave
-  applied_leave = ApplyLeave.find(params[:id])
-  applied_employee = applied_leave.employee
-  applied_employee_user = applied_employee.user
-  unless applied_employee_user.id == current_user.id
-    flash[:notice] = t('flash_msg5').to_s
-    redirect_to controller: "user", action: "dashboard"
+  def protect_applied_leave
+    applied_leave = ApplyLeave.find(params[:id])
+    applied_employee = applied_leave.employee
+    applied_employee_user = applied_employee.user
+    unless applied_employee_user.id == current_user.id
+      flash[:notice] = t('flash_msg5').to_s
+      redirect_to controller: "user", action: "dashboard"
+    end
   end
-end
 
-def protect_manager_leave_application_view
-  applied_leave = ApplyLeave.find(params[:id])
-  applied_employee = applied_leave.employee
-  applied_employees_manager = Employee.find(applied_employee.reporting_manager_id)
-  applied_employees_manager_user = applied_employees_manager.user
-  unless applied_employees_manager_user.id == current_user.id
-    flash[:notice] = t('flash_msg5').to_s
-    redirect_to controller: "user", action: "dashboard"
+  def protect_manager_leave_application_view
+    applied_leave = ApplyLeave.find(params[:id])
+    applied_employee = applied_leave.employee
+    applied_employees_manager = Employee.find(applied_employee.reporting_manager_id)
+    applied_employees_manager_user = applied_employees_manager.user
+    unless applied_employees_manager_user.id == current_user.id
+      flash[:notice] = t('flash_msg5').to_s
+      redirect_to controller: "user", action: "dashboard"
+    end
   end
-end
 
-def render(options = nil, extra_options = {}, &block)
-  if RTL_LANGUAGES.include?(I18n.locale.to_sym) && !options.nil? && (!request.xhr? && (options[:pdf]))
-    options ||= {}
-    options = options.merge(zoom: 0.68)
+  def render(options = nil, extra_options = {}, &block)
+    if RTL_LANGUAGES.include?(I18n.locale.to_sym) && !options.nil? && (!request.xhr? && (options[:pdf]))
+      options ||= {}
+      options = options.merge(zoom: 0.68)
+    end
+    super(options, extra_options, &block)
   end
-  super(options, extra_options, &block)
-end
 
-def default_time_zone_present_time
-  server_time = Time.zone.now
-  server_time_to_gmt = server_time.getgm
-  @local_tzone_time = server_time
-  time_zone = Configuration.find_by(config_key: "TimeZone")
-  if !time_zone.nil? && !time_zone.config_value.nil?
-    zone = TimeZone.find(time_zone.config_value)
-    @local_tzone_time = if zone.difference_type == "+"
-                          server_time_to_gmt + zone.time_difference
-                        else
-                          server_time_to_gmt - zone.time_difference
-                        end
+  def default_time_zone_present_time
+    server_time = Time.zone.now
+    server_time_to_gmt = server_time.getgm
+    @local_tzone_time = server_time
+    time_zone = Configuration.find_by(config_key: "TimeZone")
+    if !time_zone.nil? && !time_zone.config_value.nil?
+      zone = TimeZone.find(time_zone.config_value)
+      @local_tzone_time = if zone.difference_type == "+"
+                            server_time_to_gmt + zone.time_difference
+                          else
+                            server_time_to_gmt - zone.time_difference
+                          end
+    end
+    @local_tzone_time
   end
-  @local_tzone_time
-end
 
-def can_access_request?(action, controller)
-  permitted_to?(action, controller)
-end
+  def can_access_request?(action, controller)
+    permitted_to?(action, controller)
+  end
 
-private
+  private
 
-def set_user_language
-  lan = Configuration.find_by(config_key: "Locale")
-  I18n.default_locale = :en
-  Translator.fallback(true)
-  I18n.locale = if session[:language].nil?
-                  lan.config_value
-                else
-                  session[:language]
-                end
-  News.new.reload_news_bar
-  # end}}}}}}}"
+  def set_user_language
+    lan = ::Configuration.find_by(config_key: "Locale")
+    I18n.default_locale = :en
+    # TODO: Translator.fallback(true)
+    I18n.locale = if session[:language].nil?
+                    lan.config_value
+                  else
+                    session[:language]
+                  end
+    News.new.reload_news_bar
+  end
 end
