@@ -45,8 +45,7 @@ end
 
 if User.where(admin: true ).first.blank?
 
-  employee_category = Hr::EmployeeCategory.find_or_create_by_prefix(name: 'System Admin', prefix: 'Admin',
-                                                                status: true)
+  employee_category = Hr::EmployeeCategory.find_or_create_by(prefix: 'Admin', name: 'System Admin', status: true)
 
   employee_position = EmployeePosition.find_or_create_by_name(name: 'System Admin',
                                                               employee_category_id: employee_category.id, status: true)
