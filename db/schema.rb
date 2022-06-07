@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_07_070450) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_07_180015) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -1185,6 +1185,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_070450) do
     t.boolean "is_mandatory", default: false
     t.string "input_type"
     t.integer "priority"
+    t.index ["name"], name: "index_student_additional_fields_on_name", unique: true
   end
 
   create_table "student_categories", force: :cascade do |t|

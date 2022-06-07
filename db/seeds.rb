@@ -123,7 +123,7 @@ end
   { "name_tag" => "student_management", "priority" => 2 },
   { "name_tag" => "social_other_activity", "priority" => 4 }
 ].each do |param|
-  PrivilegeTag.find_or_create_by(name_tag: param)
+  PrivilegeTag.find_or_create_by(name_tag: param[:name_tag], priority: param[:priority])
 end
 
 # add priorities to student additional fields with nil priority, if any
