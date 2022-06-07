@@ -1,14 +1,13 @@
 class User < ApplicationRecord
-  USERNAME_FORMAT = /\A[A-Z0-9_-]*\Z/i
-  EMAIL_FORMAT = /\A[A-Z0-9._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}\Z/i
+  USERNAME_FORMAT = /\A[A-Z0-9_-]*\z/i
+  EMAIL_FORMAT = /\A[A-Z0-9._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}\z/i
 
   attr_accessor :password, :role, :old_password, :new_password, :confirm_password
 
   validates :username, uniqueness: { scope: :is_deleted, if: { is_deleted: false } } # , :email
   validates     :username, length: { within: 1..20 }
   validates     :password, length: { within: 4..40, allow_nil: true }
-  validates     :username, format: { with: USERNAME_FORMAT,
-                                     message: I18n.t('must_contain_only_letters').to_s }
+  validates     :username, format: { with: USERNAME_FORMAT, message: I18n.t('must_contain_only_letters').to_s }
   validates     :email, format: { with: EMAIL_FORMAT, allow_blank: true,
                                   message: I18n.t('must_be_a_valid_email_address').to_s }
   validates   :role, presence: { on: :create }
