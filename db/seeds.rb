@@ -55,17 +55,17 @@ if User.where(admin: true ).first.blank?
   employee_grade = Hr::EmployeeGrade.find_or_create_by(name: 'System Admin', priority: 0, status: true,
                                                         max_hours_day: nil, max_hours_week: nil)
 
-  employee = Employee.find_or_create_by_employee_number(employee_number: 'admin',
-                                                        joining_date: Date.current,
-                                                        first_name: 'Admin',
-                                                        last_name: 'User',
-                                                        employee_department_id: employee_department.id,
-                                                        employee_grade_id: employee_grade.id,
-                                                        employee_position_id: employee_position.id,
-                                                        employee_category_id: employee_category.id,
-                                                        status: true, nationality_id: '76',
-                                                        date_of_birth: Date.current - 365,
-                                                        email: 'noreply@fedena.com')
+  employee = Hr::Employee.find_or_create_by(employee_number: 'admin',
+                                            joining_date: Date.current,
+                                            first_name: 'Admin',
+                                            last_name: 'User',
+                                            employee_department_id: employee_department.id,
+                                            employee_grade_id: employee_grade.id,
+                                            employee_position_id: employee_position.id,
+                                            employee_category_id: employee_category.id,
+                                            status: true, nationality_id: '76',
+                                            date_of_birth: Date.current - 365,
+                                            email: 'noreply@fedena.com')
 
   employee.user.update(admin: true, employee: false)
 
