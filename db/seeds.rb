@@ -76,7 +76,9 @@ end
   { "name" => 'Donation', "description" => ' ', "is_income" => true },
   { "name" => 'Fee', "description" => ' ', "is_income" => true }
 ].each do |param|
-  Finance::FinanceTransactionCategory.find_or_create_by(name: param)
+  Finance::FinanceTransactionCategory.find_or_create_by(name: param[:name],
+                                                        description: param[:description], 
+                                                        is_income: param[:is_income])
 end
 
 if Weekday.count.zero?
