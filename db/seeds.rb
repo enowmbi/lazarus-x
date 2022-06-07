@@ -20,14 +20,14 @@
   { "config_key" => "DefaultCountry", "config_value" => "76" },
   { "config_key" => "FirstTimeLoginEnable", "config_value" => "0" }
 ].each do |param|
-  Configuration.find_or_create_by_config_key(param)
+  Configuration.find_or_create_by(config_key: param[:config_key])
 end
 
 [
   { "config_key" => "AvailableModules", "config_value" => "HR" },
   { "config_key" => "AvailableModules", "config_value" => "Finance" }
 ].each do |param|
-  Configuration.find_or_create_by_config_key_and_config_value(param)
+  Configuration.find_or_create_by(config_key: param[:config_key], config_value: param[:config_value])
 end
 
 if GradingLevel.count.zero?
@@ -43,9 +43,9 @@ if GradingLevel.count.zero?
   end
 end
 
-if User.first(conditions: { admin: true }).blank?
+if User.where(admin: true ).first.blank?
 
-  employee_category = EmployeeCategory.find_or_create_by_prefix(name: 'System Admin', prefix: 'Admin',
+  employee_category = Hr::EmployeeCategory.find_or_create_by_prefix(name: 'System Admin', prefix: 'Admin',
                                                                 status: true)
 
   employee_position = EmployeePosition.find_or_create_by_name(name: 'System Admin',
@@ -78,7 +78,7 @@ end
   { "name" => 'Donation', "description" => ' ', "is_income" => true },
   { "name" => 'Fee', "description" => ' ', "is_income" => true }
 ].each do |param|
-  FinanceTransactionCategory.find_or_create_by_name(param)
+  FinanceTransactionCategory.find_or_create_by(name: param)
 end
 
 if Weekday.count.zero?
@@ -104,7 +104,7 @@ end
   { "settings_key" => "AttendanceEnabled", "is_enabled" => false },
   { "settings_key" => "NewsEventsEnabled", "is_enabled" => false }
 ].each do |param|
-  SmsSetting.find_or_create_by_settings_key(param)
+  SmsSetting.find_or_create_by(settings_key: param[:settings_key])
 end
 
 Privilege.all.each do |p|
@@ -123,7 +123,7 @@ end
   { "name_tag" => "student_management", "priority" => 2 },
   { "name_tag" => "social_other_activity", "priority" => 4 }
 ].each do |param|
-  PrivilegeTag.find_or_create_by_name_tag(param)
+  PrivilegeTag.find_or_create_by(name_tag: param)
 end
 
 # add priorities to student additional fields with nil priority, if any

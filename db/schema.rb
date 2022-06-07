@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_06_201930) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_07_070450) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -528,6 +528,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_201930) do
     t.string "name"
     t.string "prefix"
     t.boolean "status"
+    t.index ["name"], name: "index_employee_categories_on_name", unique: true
+    t.index ["prefix"], name: "index_employee_categories_on_prefix", unique: true
   end
 
   create_table "employee_department_events", force: :cascade do |t|
