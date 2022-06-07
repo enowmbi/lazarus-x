@@ -229,11 +229,12 @@ class UsersController < ApplicationController
 
 
   def login
-    @institute = Configuration.find_by_config_key("LogoName")
-    available_login_authes = FedenaPlugin::AVAILABLE_MODULES.select{|m| m[:name].classify.constantize.respond_to?("login_hook")}
-    selected_login_hook = available_login_authes.first if available_login_authes.count>=1
+    @institute = ::Configuration.find_by(config_key: "LogoName")
+    available_login_authes = 
+      FedenaPlugin::AVAILABLE_MODULES.select{|m| m[:name].classify.constantize.respond_to?("login_hook")}
+    selected_login_hook = available_login_authes.first if available_login_authes.count >= 1
     if selected_login_hook
-      authenticated_user = selected_login_hook[:name].classify.constantize.send("login_hook",self)
+      authenticated_user = selected_login_hook[:name].classify.constantize.send("login_hook", self)
     else
       if request.post? and params[:user]
         @user = User.new(params[:user])
