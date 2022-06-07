@@ -16,12 +16,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-class EmployeeCategory < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
-  validates :prefix, presence: true, uniqueness: true
+module Hr
+  class EmployeeCategory < ApplicationRecord
+    validates :name, presence: true, uniqueness: true
+    validates :prefix, presence: true, uniqueness: true
 
-  scope :active, -> { where(status: true) }
+    scope :active, -> { where(status: true) }
 
-  has_many :employee_positions
-  has_many :employees
+    has_many :employee_positions
+    has_many :employees
+  end
 end
