@@ -1,3 +1,4 @@
+print "Beginning seeding process ..."
 [
   { "config_key" => "InstitutionName", "config_value" => "" },
   { "config_key" => "InstitutionAddress", "config_value" => "" },
@@ -20,14 +21,14 @@
   { "config_key" => "DefaultCountry", "config_value" => "76" },
   { "config_key" => "FirstTimeLoginEnable", "config_value" => "0" }
 ].each do |param|
-  Configuration.find_or_create_by(config_key: param[:config_key])
+  Configuration.find_or_create_by(config_key: param["config_key"])
 end
 
 [
   { "config_key" => "AvailableModules", "config_value" => "HR" },
   { "config_key" => "AvailableModules", "config_value" => "Finance" }
 ].each do |param|
-  Configuration.find_or_create_by(config_key: param[:config_key], config_value: param[:config_value])
+  Configuration.find_or_create_by(config_key: param["config_key"], config_value: param["config_value"])
 end
 
 if GradingLevel.count.zero?
@@ -76,9 +77,9 @@ end
   { "name" => 'Donation', "description" => ' ', "is_income" => true },
   { "name" => 'Fee', "description" => ' ', "is_income" => true }
 ].each do |param|
-  Finance::FinanceTransactionCategory.find_or_create_by(name: param[:name],
-                                                        description: param[:description], 
-                                                        is_income: param[:is_income])
+  Finance::FinanceTransactionCategory.find_or_create_by(name: param["name"],
+                                                        description: param["description"], 
+                                                        is_income: param["is_income"])
 end
 
 if Weekday.count.zero?
@@ -104,7 +105,7 @@ end
   { "settings_key" => "AttendanceEnabled", "is_enabled" => false },
   { "settings_key" => "NewsEventsEnabled", "is_enabled" => false }
 ].each do |param|
-  SmsSetting.find_or_create_by(settings_key: param[:settings_key])
+  SmsSetting.find_or_create_by(settings_key: param["settings_key"])
 end
 
 Privilege.all.each do |p|
@@ -123,7 +124,7 @@ end
   { "name_tag" => "student_management", "priority" => 2 },
   { "name_tag" => "social_other_activity", "priority" => 4 }
 ].each do |param|
-  PrivilegeTag.find_or_create_by(name_tag: param[:name_tag], priority: param[:priority])
+  PrivilegeTag.find_or_create_by(name_tag: param["name_tag"], priority: param["priority"])
 end
 
 # add priorities to student additional fields with nil priority, if any
@@ -156,47 +157,62 @@ end
 # system_settings
 Privilege.reset_column_information
 system_settings_tag = PrivilegeTag.find_by(name_tag: 'system_settings')
-Privilege.find_by(name: 'GeneralSettings').update(privilege_tag_id: system_settings_tag.id, priority: 10)
-Privilege.find_by(name: 'AddNewBatch').update(privilege_tag_id: system_settings_tag.id, priority: 20)
-Privilege.find_by(name: 'SubjectMaster').update(privilege_tag_id: system_settings_tag.id, priority: 30)
-Privilege.find_by(name: 'SMSManagement').update(privilege_tag_id: system_settings_tag.id, priority: 40)
+
+Privilege.create name: 'GeneralSettings', description: 'general_settings_privilege',
+  privilege_tag_id: system_settings_tag.id, priority: 10
+Privilege.create name: 'AddNewBatch', description: 'add_new_batch_privilege',
+  privilege_tag_id: system_settings_tag.id, priority: 20
+Privilege.create name: 'SubjectMaster', description: 'subject_master_privilege',
+  privilege_tag_id: system_settings_tag.id, priority: 30
+Privilege.create name: 'SMSManagement', description: 'sms_management_privilege',
+  privilege_tag_id: system_settings_tag.id, priority: 40
 
 # administration_operations
 administration_operations_tag = PrivilegeTag.find_by(name_tag: 'administration_operations')
-Privilege.find_by(name: 'HrBasics').update(privilege_tag_id: administration_operations_tag.id,
-                                           priority: 50)
-Privilege.find_by(name: 'EmployeeSearch').update(privilege_tag_id: administration_operations_tag.id,
-                                                 priority: 60)
-Privilege.find_by(name: 'EmployeeAttendance').update(privilege_tag_id: administration_operations_tag.id,
-                                                     priority: 70)
-Privilege.find_by(name: 'PayslipPowers').update(privilege_tag_id: administration_operations_tag.id,
-                                                priority: 80)
-Privilege.find_by(name: 'FinanceControl').update(privilege_tag_id: administration_operations_tag.id,
-                                                 priority: 90)
-Privilege.find_by(name: 'EventManagement').update(privilege_tag_id: administration_operations_tag.id,
-                                                  priority: 100)
-Privilege.find_by(name: 'ManageNews').update(privilege_tag_id: administration_operations_tag.id,
-                                             priority: 110)
+
+Privilege.create name: 'HrBasics', description: 'hr_basics_privilege', 
+  privilege_tag_id: administration_operations_tag.id, priority: 50
+Privilege.create name: 'EmployeeSearch', description: 'employee_search_privilege', 
+  privilege_tag_id: administration_operations_tag.id, priority: 60
+Privilege.create name: 'EmployeeAttendance', description: 'employee_attendance_privilege',
+  privilege_tag_id: administration_operations_tag.id, priority: 70
+Privilege.create name: 'PayslipPowers', description: 'payslip_powers_privilege',
+  privilege_tag_id: administration_operations_tag.id, priority: 80
+Privilege.create name: 'FinanceControl', description: 'finance_control_privilege',
+  privilege_tag_id: administration_operations_tag.id, priority: 90
+Privilege.create name: 'EventManagement', description: 'event_management_privilege',
+  privilege_tag_id: administration_operations_tag.id, priority: 100
+Privilege.create name: 'ManageNews', description: 'manage_news_privilege',
+  privilege_tag_id: administration_operations_tag.id, priority: 110
+
 # academics
 academics_tag = PrivilegeTag.find_by(name_tag: 'academics')
-Privilege.find_by(name: 'ExaminationControl').update(privilege_tag_id: academics_tag.id, priority: 230)
-Privilege.find_by(name: 'EnterResults').update(privilege_tag_id: academics_tag.id, priority: 240)
-Privilege.find_by(name: 'ViewResults').update(privilege_tag_id: academics_tag.id, priority: 250)
-Privilege.find_by(name: 'ManageTimetable').update(privilege_tag_id: academics_tag.id, priority: 260)
-Privilege.find_by(name: 'TimetableView').update(privilege_tag_id: academics_tag.id, priority: 270)
+Privilege.create name: 'ExaminationControl', description: 'examination_control_privilege',
+  privilege_tag_id: academics_tag.id, priority: 230
+Privilege.create name: 'EnterResults', description: 'enter_results_privilege',
+  privilege_tag_id: academics_tag.id, priority: 240
+Privilege.create name: 'ViewResults', description: 'view_results_privilege',
+  privilege_tag_id: academics_tag.id, priority: 250
+Privilege.create name: 'ManageTimetable', description: 'manage_timetable_privilege',
+  privilege_tag_id: academics_tag.id, priority: 260
+Privilege.create name: 'TimetableView', description: 'timetable_view_privilege',
+  privilege_tag_id: academics_tag.id, priority: 270
+
 # student_management
 student_management_tag = PrivilegeTag.find_by(name_tag: 'student_management')
-Privilege.find_by(name: 'Admission').update(privilege_tag_id: student_management_tag.id, priority: 280)
-Privilege.find_by(name: 'StudentsControl').update(privilege_tag_id: student_management_tag.id,
-                                                  priority: 290)
-Privilege.find_by(name: 'StudentView').update(privilege_tag_id: student_management_tag.id, priority: 300)
-Privilege.find_by(name: 'StudentAttendanceRegister').update(privilege_tag_id: student_management_tag.id,
-                                                            priority: 310)
-Privilege.find_by(name: 'StudentAttendanceView').update(privilege_tag_id: student_management_tag.id,
-                                                        priority: 320)
+Privilege.create name: 'Admission', description: 'admission_privilege',
+  privilege_tag_id: student_management_tag.id, priority: 280
+Privilege.create name: 'StudentsControl', description: 'students_control_privilege',
+  privilege_tag_id: student_management_tag.id, priority: 290
+Privilege.create name: 'StudentView', description: 'student_view_privilege',
+  privilege_tag_id: student_management_tag.id, priority: 300
+Privilege.create name: 'StudentAttendanceRegister', description: 'student_attendance_register_privilege',
+  privilege_tag_id: student_management_tag.id, priority: 310
+Privilege.create name: 'StudentAttendanceView', description: 'student_attendance_view_privilege',
+  privilege_tag_id: student_management_tag.id, priority: 320
 
 # update gender as string
-Employee.all.each do |e|
+Hr::Employee.all.each do |e|
   case e.gender.to_s
   when "1"
     e.update(gender: "m")
@@ -411,5 +427,6 @@ end
  "Zambia",
  "Zimbabwe",
  "Palestine"].each do |param|
-  Country.find_or_create_by_name(param)
+  Country.find_or_create_by(name: param)
 end
+print "Finished seeding data successfully"
