@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_05_213108) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_06_201930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -1362,7 +1362,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_05_213108) do
     t.boolean "parent"
     t.boolean "is_first_login"
     t.boolean "is_deleted", default: false
-    t.index ["username"], name: "index_users_on_username"
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   create_table "weekdays", force: :cascade do |t|
