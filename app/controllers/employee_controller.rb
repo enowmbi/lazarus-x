@@ -1718,7 +1718,7 @@ class EmployeeController < ApplicationController
 
   def delete
     employee = Employee.find(params[:id])
-    unless employee.has_dependency
+    unless employee.dependency?
       employee_subject=EmployeesSubject.destroy_all(:employee_id=>employee.id)
       employee.user.destroy
       employee.destroy
