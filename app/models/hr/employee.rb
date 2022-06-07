@@ -37,8 +37,12 @@ module Hr
     has_many    :finance_transactions, as: :payee
     has_many    :employee_attendances
 
-    validates :email, format: { with: /^[A-Z0-9._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i, allow_blank: true,
-                                message: t('must_be_a_valid_email_address').to_s }
+    has_one_attached :photo
+
+    EMAIL_FORMAT = /\A[A-Z0-9._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}\z/i
+
+    validates :email, format: { with: EMAIL_FORMAT, allow_blank: true,
+                                message: I18n.t('must_be_a_valid_email_address').to_s }
 
     validates :employee_category_id, :employee_number, :first_name, :employee_position_id,
               :employee_department_id, :date_of_birth, :joining_date, :nationality_id, presence: true
@@ -47,19 +51,20 @@ module Hr
     validates_associated :user
     before_validation :create_user_and_validate
     before_save :status_true
-    has_attached_file :photo,
-                      styles: { original: "125x125#" },
-                      url: "/system/:class/:attachment/:id/:style/:basename.:extension",
-                      path: ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension"
 
-    VALID_IMAGE_TYPES = ['image/gif', 'image/png', 'image/jpeg', 'image/jpg'].freeze
+    # has_attached_file :photo,
+    #                   styles: { original: "125x125#" },
+    #                   url: "/system/:class/:attachment/:id/:style/:basename.:extension",
+    #                   path: ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension"
 
-    validates_attachment_content_type :photo, content_type: VALID_IMAGE_TYPES,
-                                              message: 'Image can only be GIF, PNG, JPG',
-                                              if: proc { |p| p.photo_file_name.present? }
+    # VALID_IMAGE_TYPES = ['image/gif', 'image/png', 'image/jpeg', 'image/jpg'].freeze
 
-    validates_attachment_size :photo, less_than: 512_000, message: 'must be less than 500 KB.',
-                                      if: proc { |p| p.photo_file_name_changed? }
+    # validates_attachment_content_type :photo, content_type: VALID_IMAGE_TYPES,
+    #                                           message: 'Image can only be GIF, PNG, JPG',
+    #                                           if: proc { |p| p.photo_file_name.present? }
+
+    # validates_attachment_size :photo, less_than: 512_000, message: 'must be less than 500 KB.',
+    #                                   if: proc { |p| p.photo_file_name_changed? }
 
     def status_true
       self.status = 1 unless status == 1
