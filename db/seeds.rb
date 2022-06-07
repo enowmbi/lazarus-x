@@ -50,8 +50,7 @@ if User.where(admin: true ).first.blank?
   employee_position = Hr::EmployeePosition.find_or_create_by(name: 'System Admin',
                                                               employee_category_id: employee_category.id, status: true)
 
-  employee_department = EmployeeDepartment.find_or_create_by_code(code: 'Admin', name: 'System Admin',
-                                                                  status: true)
+  employee_department = Hr::EmployeeDepartment.find_or_create_by(code: 'Admin', name: 'System Admin', status: true)
 
   employee_grade = EmployeeGrade.find_or_create_by_name(name: 'System Admin', priority: 0, status: true,
                                                         max_hours_day: nil, max_hours_week: nil)
