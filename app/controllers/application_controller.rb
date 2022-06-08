@@ -271,13 +271,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def render(options = nil, extra_options = {}, &block)
-    if RTL_LANGUAGES.include?(I18n.locale.to_sym) && !options.nil? && (!request.xhr? && (options[:pdf]))
-      options ||= {}
-      options = options.merge(zoom: 0.68)
-    end
-    super(options, extra_options, &block)
-  end
+  # def render(options = nil, extra_options = {}, &block)
+    # if RTL_LANGUAGES.include?(I18n.locale.to_sym) && !options.nil? && (!request.xhr? && (options[:pdf]))
+      # options ||= {}
+      # options = options.merge(zoom: 0.68)
+    # end
+    # super(options, extra_options, &block)
+  # end
 
   def default_time_zone_present_time
     server_time = Time.zone.now

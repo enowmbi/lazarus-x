@@ -249,6 +249,7 @@ class UsersController < ApplicationController
     elsif authenticated_user.blank? and request.post?
       flash[:notice] = "#{t('login_error_message')}"
     end
+    # render "user/login"
   end
 
   def first_login_change_password
