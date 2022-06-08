@@ -266,12 +266,12 @@ class CalendarController < ApplicationController
     @user = current_user
     @date = params[:id].to_date
     finance_due_check = Event.find_all_by_is_due(true,true, :conditions => " events.start_date >= '#{@date.strftime("%Y-%m-%d 00:00:00")}' AND events.start_date <= '#{@date.strftime("%Y-%m-%d 23:59:59")}'")
-    finance_due_check.reject!{|x| !x.is_active_event }
+    finance_due_check.reject!{|x| !x.active_event? }
     if @user.student? or @user.parent?
-      finance_due_check.reject!{|x| !x.is_student_event(@user.student_record) } if @user.student
-      finance_due_check.reject!{|x| !x.is_student_event(@user.parent_record) } if @user.parent
+      finance_due_check.reject!{|x| !x.student_event?(@user.student_record) } if @user.student
+      finance_due_check.reject!{|x| !x.student_event?(@user.parent_record) } if @user.parent
     elsif @user.employee?
-      finance_due_check.reject!{|x| !x.is_employee_event(@user) }
+      finance_due_check.reject!{|x| !x.employee_event?(@user) }
     end
     @finance_due = []
     finance_due_check.each do |h|
@@ -336,17 +336,17 @@ class CalendarController < ApplicationController
       end
       #finance dues
       if e.is_due == true
-        if e.is_active_event
+        if e.active_event?
           if @user.admin?
             build_common_events_hash(e,'finance_due',@show_month)
           elsif @user.student? or @user.parent?
             student= @user.student_record if @user.student
             student= @user.parent_record if @user.parent
-            if e.is_student_event(student)
+            if e.student_event?(student)
               build_common_events_hash(e,'finance_due',@show_month)
             end
           elsif @user.employee?
-            if e.is_employee_event(@user)
+            if e.employee_event?(@user)
               build_common_events_hash(e,'finance_due',@show_month)
             end
           end
