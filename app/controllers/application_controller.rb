@@ -271,7 +271,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # def render(options = nil, extra_options = {}, &block)
+  # TODO  def render(options = nil, extra_options = {}, &block)
     # if RTL_LANGUAGES.include?(I18n.locale.to_sym) && !options.nil? && (!request.xhr? && (options[:pdf]))
       # options ||= {}
       # options = options.merge(zoom: 0.68)
