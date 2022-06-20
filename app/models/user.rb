@@ -29,10 +29,11 @@ class User < ApplicationRecord
   scope :inactive, -> { where(is_deleted: true) }
 
   def is_deleted_is_false
-    return true if is_deleted = false
+    return true if is_deleted == false
 
     false
   end
+
   def before_save
     self.salt = random_string(8) if salt.nil?
     self.hashed_password = Digest::SHA1.hexdigest(salt + password) unless password.nil?
