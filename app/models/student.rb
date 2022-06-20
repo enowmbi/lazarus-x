@@ -17,9 +17,8 @@
 #limitations under the License.
 
 class Student < ApplicationRecord
-
   include CceReportMod
-    
+
   belongs_to :country
   belongs_to :batch
   belongs_to :student_category
@@ -32,7 +31,7 @@ class Student < ApplicationRecord
   has_many   :guardians, :foreign_key => 'ward_id'
   has_many   :finance_transactions, :as => :payee
   has_many   :attendances
-  has_many   :finance_fees
+  has_many   :finance_fees, class_name: "Finance::FinanceFee"
   has_many   :fee_category ,:class_name => "FinanceFeeCategory"
   has_many   :students_subjects
   has_many   :subjects ,:through => :students_subjects
