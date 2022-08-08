@@ -25,29 +25,16 @@ class ArchivedEmployee < ApplicationRecord
   has_many    :archived_employee_bank_details, dependent: :destroy
   has_many    :archived_employee_additional_details, dependent: :destroy
 
-  has_one_attached :photo
+  has_one_attached :photo do |attached_image|
+    attached_image.variant(:thumb, resize_to_limit: [100, 100])
+    attached_image.variant(:small, resize_to_limit: [150, 150])
+  end
 
   before_save :status_false
 
   def status_false
     self.status = 0 unless status.zero?
   end
-
-  # def image_file=(input_data)
-  # return if input_data.blank?
-
-  # self.photo_filename     = input_data.original_filename
-  # self.photo_content_type = input_data.content_type.chomp
-  # self.photo_data         = input_data.read
-  # end
-
-  # has_attached_file :photo,
-  # styles: {
-  # thumb: "100x100#",
-  # small: "150x150>"
-  # },
-  # url: "/system/:class/:attachment/:id/:style/:basename.:extension",
-  # path: ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension"
 
   def full_name
     "#{first_name} #{middle_name} #{last_name}"
