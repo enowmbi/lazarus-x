@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_10_202620) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_09_193254) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -719,7 +719,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_202620) do
     t.index ["subject_id"], name: "index_exams_on_subject_id"
   end
 
-  create_table "fa_criterias", force: :cascade do |t|
+  create_table "fa_criteria", force: :cascade do |t|
     t.string "fa_name"
     t.string "desc"
     t.integer "fa_group_id"
@@ -727,7 +727,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_202620) do
     t.datetime "updated_at", null: false
     t.integer "sort_order"
     t.boolean "is_deleted", default: false
-    t.index ["fa_group_id"], name: "index_fa_criterias_on_fa_group_id"
+    t.index ["fa_group_id"], name: "index_fa_criteria_on_fa_group_id"
   end
 
   create_table "fa_groups", force: :cascade do |t|
