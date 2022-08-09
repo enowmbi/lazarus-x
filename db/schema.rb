@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_09_193254) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_09_200750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -915,6 +915,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_09_193254) do
     t.string "description"
     t.index ["batch_id", "is_deleted"], name: "index_grading_levels_on_batch_id_and_is_deleted"
     t.index ["batch_id"], name: "index_grading_levels_on_batch_id"
+    t.index ["name"], name: "index_grading_levels_on_name", unique: true
   end
 
   create_table "grouped_batches", force: :cascade do |t|
