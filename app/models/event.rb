@@ -70,7 +70,7 @@ class Event < ApplicationRecord
 
   class << self
     def a_holiday?(day)
-      return true if Event.holidays.count(:all, conditions: ["start_date <=? AND end_date >= ?", day, day]).positive?
+      return true if Event.holidays.where("start_date <=? AND end_date >= ?", day, day).count.positive?
 
       false
     end
