@@ -23,7 +23,7 @@ class FaCriterium < ApplicationRecord
   belongs_to :fa_group
 
   validates :fa_name, presence: true
-  validates :description, presence: true
+  validates :desc, presence: true
 
   default_scope -> { order('sort_order ASC') }
   scope :active, -> { where(is_deleted: false) }
