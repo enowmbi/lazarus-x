@@ -18,7 +18,7 @@
 
 class News < ApplicationRecord
   belongs_to :author, class_name: 'User'
-  has_many :comments, class_name: 'NewsComment'
+  has_many :comments, class_name: 'NewsComment', dependent: :destroy
   after_save :reload_news_bar
   after_destroy :reload_news_bar
 
@@ -28,9 +28,9 @@ class News < ApplicationRecord
 
   cattr_reader :per_page
   # TODO: xss_terminate except: [:content]
-  @@per_page = 12
+  @per_page = 12
 
-  def self.get_latest
+  def self.latest
     News.all.limit(3)
   end
 
