@@ -16,23 +16,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 class SchoolDetail < ApplicationRecord
-  has_one_attached :logo
-# TODO: clean up
-  # has_attached_file :logo,
-                    # styles: { original: "150x110#" },
-                    # url: "/system/:class/:attachment/:id_partition/:style/:basename.:extension",
-                    # path: ":rails_root/public/system/:class/:attachment/:id_partition/:style/:basename.:extension",
-                    # default_url: 'application/app_fedena_logo.png',
-                    # default_path: ':rails_root/public/images/application/app_fedena_logo.png'
+  has_one_attached :logo do |attached_logo|
+    attached_logo.variant(:original, resize_to_limit: [150, 110])
+  end
 
-  # VALID_IMAGE_TYPES = ['image/gif', 'image/png', 'image/jpeg', 'image/jpg'].freeze
+  validate :image_type_and_size
 
-  # validates_attachment_content_type :logo, content_type: VALID_IMAGE_TYPES,
-                                           # message: 'Image can only be GIF, PNG, JPG', if: proc { |p|
-                                                                                             # p.logo_file_name.present?
-                                                                                           # }
-  # validates_attachment_size :logo, less_than: 512_000,
-                                   # message: 'must be less than 500 KB.', if: proc { |p|
-                                                                               # p.logo_file_name_changed?
-                                                                             # }
+  private
+
+  def acceptable_image
+    return unless logo.attached?
+
+    errors.add(:logo, "must be less than 500 KB") unless logo.byte_size < 500.kilobytes
+
+    valid_image_types = ['image/gif', 'image/png', 'image/jpeg', 'image/jpg'].freeze
+    errors.add(:logo, "can on ly be GIF, PNG or  JPG") unless valid_image_types.include(logo.content_type)
+  end
 end
