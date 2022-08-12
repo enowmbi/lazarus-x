@@ -27,11 +27,12 @@ class Subject < ApplicationRecord
   has_many :grouped_exam_reports
   has_and_belongs_to_many_with_deferred_save :fa_groups
 
-  validates :name, :max_weekly_classes, :code, :batch_id, presence: true
+  validates :name, presence: true
   validates :credit_hours, presence: { if: :check_grade_type }
-  validates :max_weekly_classes, numericality: true
+  validates :max_weekly_classes, presence: true, numericality: true
   validates :amount, numericality: { allow_nil: true }
-  validates :code, uniqueness: { case_sensitive: false, scope: %i[batch_id is_deleted], unless: :is_deleted?
+  validates :code, presence: true,
+                   uniqueness: { case_sensitive: false, scope: %i[batch_id is_deleted], unless: :is_deleted? }
 
   scope :for_batch, ->(b) { where(batch_id: b.to_i, is_deleted: false) }
   scope :without_exams, -> { where(no_exams: false, is_deleted: false) }
