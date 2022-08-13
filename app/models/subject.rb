@@ -25,7 +25,7 @@ class Subject < ApplicationRecord
   has_many :students_subjects
   has_many :students, through: :students_subjects
   has_many :grouped_exam_reports
-  has_and_belongs_to_many_with_deferred_save :fa_groups
+  # TODO: has_and_belongs_to_many_with_deferred_save :fa_groups
 
   validates :name, presence: true
   validates :credit_hours, presence: { if: :check_grade_type }
