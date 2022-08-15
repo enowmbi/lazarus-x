@@ -37,34 +37,31 @@ module Hr
     has_many    :finance_transactions, as: :payee
     has_many    :employee_attendances
 
-    has_one_attached :photo
+    has_one_attached :photo do |attached_photo|
+      attached_photo.variants(:original, resize_to_limit: [125, 125])
+    end
 
     EMAIL_FORMAT = /\A[A-Z0-9._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}\z/i
 
     validates :email, format: { with: EMAIL_FORMAT, allow_blank: true,
                                 message: I18n.t('must_be_a_valid_email_address').to_s }
 
-    validates :employee_category_id, :employee_number, :first_name, :employee_position_id,
-              :employee_department_id, :date_of_birth, :joining_date, :nationality_id, presence: true
+    validates :employee_number, :first_name, :date_of_birth, :joining_date, :nationality_id, presence: true
     validates :employee_number, uniqueness: true
+    validate :acceptable_photo
 
-    validates_associated :user
+    # TODO: validates_associated :user
     before_validation :create_user_and_validate
     before_save :status_true
 
-    # has_attached_file :photo,
-    #                   styles: { original: "125x125#" },
-    #                   url: "/system/:class/:attachment/:id/:style/:basename.:extension",
-    #                   path: ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension"
+    def acceptable_photo
+      return unless photo.attached?
 
-    # VALID_IMAGE_TYPES = ['image/gif', 'image/png', 'image/jpeg', 'image/jpg'].freeze
+      valid_image_types = ['image/gif', 'image/png', 'image/jpeg', 'image/jpg'].freeze
 
-    # validates_attachment_content_type :photo, content_type: VALID_IMAGE_TYPES,
-    #                                           message: 'Image can only be GIF, PNG, JPG',
-    #                                           if: proc { |p| p.photo_file_name.present? }
-
-    # validates_attachment_size :photo, less_than: 512_000, message: 'must be less than 500 KB.',
-    #                                   if: proc { |p| p.photo_file_name_changed? }
+      errors.add(:photo, "can only be GIF, PNG or JPG") unless valid_image_types.include?(photo.content_type)
+      errors.add(:photo, "must be less than 500KB") unless photo.byte_size < 500.kilobytes
+    end
 
     def status_true
       self.status = 1 unless status == 1
