@@ -26,9 +26,9 @@ module Hr
     scope :active, -> { where(status: true) }
 
     def validate
-      if !(max_hours_day.nil? || max_hours_week.nil?) && (max_hours_day > max_hours_week)
-        errors.add(:max_hours_week, I18n.t('should_be_greater_than_max_period').to_s)
-      end
+      return unless !(max_hours_day.nil? || max_hours_week.nil?) && (max_hours_day > max_hours_week)
+
+      errors.add(:max_hours_week, I18n.t('should_be_greater_than_max_period').to_s)
     end
   end
 end
