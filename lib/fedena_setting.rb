@@ -1,6 +1,7 @@
 class FedenaSetting
 
   cattr_accessor :sms_settings_from_yml, :smtp_settings_from_yml, :company_settings_from_yml
+  RAILS_ENV = Rails.env
 
   @@sms_settings_from_yml = YAML.load_file(File.join(Rails.root,"config","sms_settings.yml"))[RAILS_ENV] if File.exists?("#{Rails.root}/config/sms_settings.yml")
   @@smtp_settings_from_yml = YAML.load_file(File.join(Rails.root,"config","smtp_settings.yml"))[RAILS_ENV] if File.exists?("#{Rails.root}/config/smtp_settings.yml")
