@@ -1,4 +1,4 @@
-<%-# Fedena
+# Fedena
 #Copyright 2010 Foradian Technologies Private Limited
 #
 #This product includes software developed at
@@ -15,11 +15,11 @@
 #"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 #KIND, either express or implied.  See the License for the
 #specific language governing permissions and limitations
-#under the License. -%>
+#under the License.
 
 <div id="wrapper">
   <div id="top_logo">
-    <%# <%= image_tag current_school_detail.logo.url %1> %>
+    <%= image_tag current_school_detail.logo.url %>
   </div>
 
   <div id="login_strip"></div>
@@ -50,9 +50,9 @@
         </div>
 
         <label for="forgot_password" class="forgot_password_link">
-          <%# <%= link_to t('forgot_password'), %>
-            <%# :controller => "user", %>
-            <%# :action => "forgot_password" %1> %>
+          <%= link_to t('forgot_password'),
+            :controller => "user",
+            :action => "forgot_password" %>
         </label>
 
 
