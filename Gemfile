@@ -77,17 +77,17 @@ group :development do
 
   # Adding gems for linting
   gem "rubocop"
-  # gem "rubocop-rails", require: false
+  gem "rubocop-rails", require: false
 
   # Add gems for security checks
-  # gem "brakeman"
+  gem "brakeman"
   gem "bundler-audit"
-  # gem "ruby_audit"
+  gem "ruby_audit"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
+  gem "rack-mini-profiler"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem "spring"
 end
 
