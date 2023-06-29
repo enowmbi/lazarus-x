@@ -59,6 +59,8 @@ Rails.application.routes.draw do
     resources :timetable_entries
   end
 
+  resource :configurations
+
   # TODO: Uncomment lines below
   # fa_scores 'assessment_scores/exam/:exam_id/fa_group/:fa_group_id', :controller=>'assessment_scores',:action=>'fa_scores'
   # observation_scores 'assessment_scores/batch/:batch_id/observation_group/:observation_group_id', :controller=>'assessment_scores',:action=>'observation_scores'
