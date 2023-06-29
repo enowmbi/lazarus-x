@@ -54,6 +54,12 @@ gem "image_processing", "~> 1.2"
 # Use awesome_rails_console for more beautiful console
 gem "awesome_rails_console"
 
+# Add authorization gem  - oop authorization gem
+gem "pundit"
+
+# Add Rolify gem - role management library with resource scoping
+gem "rolify"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
