@@ -97,3 +97,7 @@ group :development do
   gem "spring"
 end
 
+group :test do
+  gem "capybara"
+end
+
