@@ -17,10 +17,10 @@
 #limitations under the License.
 
 class ConfigurationsController < ApplicationController
-  before_filter :login_required
+  before_action :login_required
   filter_access_to :all
 
-  FILE_EXTENSIONS = [".jpg",".jpeg",".png"]#,".gif",".png"]
+  FILE_EXTENSIONS = [".jpg",".jpeg",".png", ".gif", ".png"]
   FILE_MAXIMUM_SIZE_FOR_FILE=1048576
 
   def settings
