@@ -18,7 +18,7 @@
 
 class ConfigurationsController < ApplicationController
   before_action :login_required
-  filter_access_to :all
+  # filter_access_to :all
 
   FILE_EXTENSIONS = [".jpg",".jpeg",".png", ".gif", ".png"]
   FILE_MAXIMUM_SIZE_FOR_FILE=1048576
