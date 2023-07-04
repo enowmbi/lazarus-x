@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root "users#login"
   get "users/forgot_password", to: "users#forgot_password"
+  post "users/forgot_password", to: "users#forgot_password"
   resources :grading_levels
   resources :ranking_levels, :collection => {:create_ranking_level=>[:get,:post], :edit_ranking_level=>[:get,:post], :update_ranking_level=>[:get,:post], :delete_ranking_level=>[:get,:post], :ranking_level_cancel=>[:get,:post], :change_priority=>[:get,:post]}
   resources :class_designations
