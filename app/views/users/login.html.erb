@@ -42,7 +42,8 @@
         </div>
 
         <div id="notice-box">
-          <% if !flash.empty? %>
+          <% unless flash.empty? %>
+            <% debugger %>
             <div id="notice"><%= flash[:notice] %></div>
           <% end %>
         </div>
