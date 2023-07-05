@@ -230,24 +230,24 @@ class UsersController < ApplicationController
 
   def login
     @institute = ::Configuration.find_by(config_key: "LogoName")
-    available_login_authes = 
-      FedenaPlugin::AVAILABLE_MODULES.select{|m| m[:name].classify.constantize.respond_to?("login_hook")}
+    available_login_authes =
+      FedenaPlugin::AVAILABLE_MODULES.select{ |m| m[:name].classify.constantize.respond_to?("login_hook") }
     selected_login_hook = available_login_authes.first if available_login_authes.count >= 1
     if selected_login_hook
       authenticated_user = selected_login_hook[:name].classify.constantize.send("login_hook", self)
     else
-      if request.post? and params[:user]
-        @user = User.new(params[:user])
-        user = User.active.find_by_username @user.username
-        if user.present? and User.authenticate?(@user.username, @user.password)
+      if request.post? && params[:user]
+        @user = User.new(user_params)
+        user = User.active.find_by(username: @user.username)
+        if user.present? && User.authenticate?(@user.username, @user.password)
           authenticated_user = user
         end
       end
     end
     if authenticated_user.present?
       successful_user_login(authenticated_user) and return
-    elsif authenticated_user.blank? and request.post?
-      flash[:notice] = "#{t('login_error_message')}"
+    elsif authenticated_user.blank? && request.post?
+      flash[:notice] = I18n.t("login_error_message")
     end
     # render "user/login"
   end
@@ -397,6 +397,10 @@ class UsersController < ApplicationController
     session[:user_id] = user.id
     flash[:notice] = "#{t('welcome')}, #{user.first_name} #{user.last_name}!"
     redirect_to session[:back_url] || {:controller => 'user', :action => 'dashboard'}
+  end
+
+  def user_params
+    params.require(:user).permit(:username, :password)
   end
 end
 
