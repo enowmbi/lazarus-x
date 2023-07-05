@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   root "users#login"
   post "/", to: "users#login"
   get "users/forgot_password", to: "users#forgot_password"
