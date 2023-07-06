@@ -47,9 +47,9 @@ class Student < ApplicationRecord
   validates :admission_date, :first_name, :date_of_birth, presence: true
   validates :admission_no, presence: true,  uniqueness: true
   validates :gender, presence: true
-  validates :email, format: { with: /^[A-Z0-9._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i, allow_blank: true,
+  validates :email, format: { with: /\A[A-Z0-9._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}\z/i, allow_blank: true,
                               message: I18n.t('must_be_a_valid_email_address').to_s }
-  validates :admission_no, format: { with: /^[A-Z0-9_-]*$/i, message: I18n.t('must_contain_only_letters').to_s }
+  validates :admission_no, format: { with: /\A[A-Z0-9_-]*\z/i, message: I18n.t('must_contain_only_letters').to_s }
 
   # TODO: validates_associated :user
 
@@ -64,22 +64,27 @@ class Student < ApplicationRecord
 
   scope :by_first_name, -> { where(is_active: true).order(:first_name) }
 
+  has_one_attached :photo do |attached_photo|
+    attached_photo.variant(:original, resize_to_limit: [150, 110])
+  end
 
-  has_attached_file :photo,
-                    styles: { original: "125x125#" },
-                    url: "/system/:class/:attachment/:id/:style/:basename.:extension",
-                    path: ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension"
+  validate :image_type_and_size
 
-  VALID_IMAGE_TYPES = ['image/gif', 'image/png', 'image/jpeg', 'image/jpg'].freeze
+  # has_attached_file :photo,
+  #                   styles: { original: "125x125#" },
+  #                   url: "/system/:class/:attachment/:id/:style/:basename.:extension",
+  #                   path: ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension"
 
-  validates_attachment_content_type :photo, content_type: VALID_IMAGE_TYPES,
-                                            message: 'Image can only be GIF, PNG, JPG', if: proc { |p|
-                                                                                              p.photo_file_name.present?
-                                                                                            }
-  validates_attachment_size :photo, less_than: 512_000,\
-                                    message: 'must be less than 500 KB.', if: proc { |p|
-                                                                                p.photo_file_name_changed?
-                                                                              }
+  # VALID_IMAGE_TYPES = ['image/gif', 'image/png', 'image/jpeg', 'image/jpg'].freeze
+
+  # validates_attachment_content_type :photo, content_type: VALID_IMAGE_TYPES,
+  #                                           message: 'Image can only be GIF, PNG, JPG', if: proc { |p|
+  #                                                                                             p.photo_file_name.present?
+  #                                                                                           }
+  # validates_attachment_size :photo, less_than: 512_000,\
+  #                                   message: 'must be less than 500 KB.', if: proc { |p|
+  #                                                                               p.photo_file_name_changed?
+  #                                                                             }
 
   def validate
     errors.add(:date_of_birth, "#{t('cant_be_a_future_date')}.") if !date_of_birth.nil? && (date_of_birth >= Date.today)
@@ -559,5 +564,16 @@ batch_id, score_type: "s")
     end
 
     false
+  end
+
+  private
+
+  def acceptable_image
+    return unless photo.attached?
+
+    errors.add(:photo, "must be less than 500 KB") unless photo.byte_size < 500.kilobytes
+
+    valid_image_types = ['image/gif', 'image/png', 'image/jpeg', 'image/jpg'].freeze
+    errors.add(:photo, "can on ly be GIF, PNG or  JPG") unless valid_image_types.include(photo.content_type)
   end
 end
