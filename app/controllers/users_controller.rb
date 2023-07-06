@@ -144,24 +144,21 @@ class UsersController < ApplicationController
           flash[:warn_notice] =  "<p>#{t('flash10')}</p>"
         end
       end
-
-      
     end
   end
 
   def create
+    byebug
     @config = Configuration.available_modules
 
     @user = User.new(params[:user])
     if request.post?
-          
       if @user.save
         flash[:notice] = "#{t('flash17')}"
         redirect_to :controller => 'user', :action => 'edit', :id => @user.username
       else
         flash[:notice] = "#{t('flash16')}"
       end
-           
     end
   end
 
