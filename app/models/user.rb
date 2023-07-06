@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many  :user_events
   has_many  :events, through: :user_events
   has_one :student_record, class_name: "Student"
-  has_one :employee_record, class_name: "Employee"
+  has_one :employee_record, class_name: "Hr::Employee"
 
   scope :active, -> { where(is_deleted: false) }
   scope :inactive, -> { where(is_deleted: true) }
