@@ -24,7 +24,6 @@ class User < ApplicationRecord
   before_create :set_hashed_password_and_role
 
   def set_hashed_password_and_role
-    debugger
     self.salt = random_string(8) if salt.nil?
     self.hashed_password = Digest::SHA1.hexdigest(salt + password) unless password.nil?
     return unless new_record?
