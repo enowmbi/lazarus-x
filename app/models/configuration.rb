@@ -56,7 +56,7 @@ class Configuration < ApplicationRecord
     end
 
     def available_modules
-      modules = find_all_by_config_key('AvailableModules')
+      modules = Configuration.where(config_key: "AvailableModules")
       modules.map(&:config_value)
     end
 
