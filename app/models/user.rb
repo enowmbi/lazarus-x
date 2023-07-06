@@ -21,6 +21,7 @@ class User < ApplicationRecord
   scope :inactive, -> { where(is_deleted: true) }
 
   def before_save
+    debugger
     self.salt = random_string(8) if salt.nil?
     self.hashed_password = Digest::SHA1.hexdigest(salt + password) unless password.nil?
     if new_record?
@@ -49,9 +50,9 @@ class User < ApplicationRecord
     count
   end
 
-  def self.authenticate?(_username, password)
-    u = User.find_by username:
-    u.hashed_password == Digest::SHA1.hexdigest(u.salt + password)
+  def self.authenticate?(username, password)
+    user = User.find_by(username: username)
+    user.hashed_password == Digest::SHA1.hexdigest(user.salt + password)
   end
 
   def random_string(len)

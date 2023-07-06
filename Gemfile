@@ -52,7 +52,7 @@ gem "devise"
 gem "image_processing", "~> 1.2"
 
 # Use awesome_rails_console for more beautiful console
-gem "awesome_rails_console"
+# gem "awesome_rails_console"
 
 # Add authorization gem  - oop authorization gem
 gem "pundit"
