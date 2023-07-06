@@ -38,7 +38,7 @@ module Hr
     has_many    :employee_attendances
 
     has_one_attached :photo do |attached_photo|
-      attached_photo.variants(:original, resize_to_limit: [125, 125])
+      attached_photo.variant(:original, resize_to_limit: [125, 125])
     end
 
     EMAIL_FORMAT = /\A[A-Z0-9._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}\z/i
