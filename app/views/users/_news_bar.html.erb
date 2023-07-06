@@ -17,7 +17,7 @@
 #specific language governing permissions and limitations
 #under the License. -%>
 
-<% @dash_news = News.get_latest %>
+<% @dash_news = News.latest %>
 
 <div id="news_bar">
   <% @dash_news.each do |news| %>
