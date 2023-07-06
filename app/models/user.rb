@@ -20,20 +20,23 @@ class User < ApplicationRecord
   scope :active, -> { where(is_deleted: false) }
   scope :inactive, -> { where(is_deleted: true) }
 
-  def before_save
+  before_save :set_hashed_password_and_role
+  before_create :set_hashed_password_and_role
+
+  def set_hashed_password_and_role
     debugger
     self.salt = random_string(8) if salt.nil?
     self.hashed_password = Digest::SHA1.hexdigest(salt + password) unless password.nil?
-    if new_record?
-      self.admin = false
-      self.student = false
-      self.employee = false
-      self.admin    = true if role == 'Admin'
-      self.student  = true if role == 'Student'
-      self.employee = true if role == 'Employee'
-      self.parent = true if role == 'Parent'
-      self.is_first_login = true
-    end
+    return unless new_record?
+
+    self.admin = false
+    self.student = false
+    self.employee = false
+    self.admin    = true if role == 'Admin'
+    self.student  = true if role == 'Student'
+    self.employee = true if role == 'Employee'
+    self.parent = true if role == 'Parent'
+    self.is_first_login = true
   end
 
   def full_name
