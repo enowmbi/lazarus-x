@@ -174,15 +174,15 @@ class UsersController < ApplicationController
   
   def dashboard
     @user = current_user
-    @config = Configuration.available_modules
+    @config = ::Configuration.available_modules
     @employee = @user.employee_record if ["#{t('admin')}","#{t('employee_text')}"].include?(@user.role_name)
     if @user.student?
-      @student = Student.find_by_admission_no(@user.username)
+      @student = Student.find_by(admission_no: @user.username)
     end
     if @user.parent?
-      @student = Student.find_by_admission_no(@user.username[1..@user.username.length])
+      @student = Student.find_by(admission_no: @user.username[1..@user.username.length])
     end
-    @first_time_login = Configuration.get_config_value('FirstTimeLoginEnable')
+    @first_time_login = ::Configuration.get_config_value('FirstTimeLoginEnable')
     if  session[:user_id].present? and @first_time_login == "1" and @user.is_first_login != false
       flash[:notice] = "#{t('first_login_attempt')}"
       redirect_to :controller => "user",:action => "first_login_change_password",:id => @user.username
@@ -393,7 +393,7 @@ class UsersController < ApplicationController
   def successful_user_login(user)
     session[:user_id] = user.id
     flash[:notice] = "#{t('welcome')}, #{user.first_name} #{user.last_name}!"
-    redirect_to session[:back_url] || {:controller => 'user', :action => 'dashboard'}
+    redirect_to session[:back_url] || users_dashboard_path
   end
 
   def user_params
