@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :password, :role, :old_password, :new_password, :confirm_password
 
-  validates :username, uniqueness: { scope: [:is_deleted], unless: :is_deleted }
+  validates     :username, uniqueness: { scope: [:is_deleted], unless: :is_deleted }
   validates     :username, length: { within: 1..20 }
   validates     :password, length: { within: 4..40, allow_nil: true }
   validates     :username, format: { with: /\A[A-Z0-9_-]*\z/i,
@@ -17,8 +17,8 @@ class User < ApplicationRecord
   has_one :student_record, class_name: "Student"
   has_one :employee_record, class_name: "Employee"
 
-  named_scope :active, conditions: { is_deleted: false }
-  named_scope :inactive, conditions: { is_deleted: true }
+  scope :active, -> { where(is_deleted: false) }
+  scope :inactive, -> { where(is_deleted: true) }
 
   def before_save
     self.salt = random_string(8) if salt.nil?
