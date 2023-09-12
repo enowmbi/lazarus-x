@@ -108,10 +108,6 @@ end
   SmsSetting.find_or_create_by(settings_key: param["settings_key"])
 end
 
-Privilege.all.each do |p|
-  p.update(description: "#{p.name.underscore}_privilege")
-end
-
 Event.all.each do |e|
   e.destroy if e.origin_type == "AdditionalExam"
 end
@@ -210,6 +206,10 @@ Privilege.create name: 'StudentAttendanceRegister', description: 'student_attend
   privilege_tag_id: student_management_tag.id, priority: 310
 Privilege.create name: 'StudentAttendanceView', description: 'student_attendance_view_privilege',
   privilege_tag_id: student_management_tag.id, priority: 320
+
+Privilege.all.each do |p|
+  p.update(description: "#{p.name.underscore}_privilege")
+end
 
 # update gender as string
 Hr::Employee.all.each do |e|
