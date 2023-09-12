@@ -141,7 +141,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_if_loggedin
-    redirect_to controller: 'user', action: 'dashboard' if session[:user_id]
+    redirect_to controller: 'users', action: 'dashboard' if session[:user_id]
   end
 
   def configuration_settings_for_hr
