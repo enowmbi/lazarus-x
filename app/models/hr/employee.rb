@@ -94,7 +94,7 @@ module Hr
     end
 
     def check_user_errors(user)
-      user.errors.each { |attr, msg| errors.add(attr.to_sym, msg.to_s) } unless user.valid?
+      user.errors.messages.each { |attr, msg| errors.add(attr.to_sym, msg.to_s) } unless user.valid?
       user.errors.blank?
     end
 
