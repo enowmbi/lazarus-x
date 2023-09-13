@@ -138,33 +138,25 @@ class User < ApplicationRecord
     all_events = []
     case role_name
     when "Admin"
-      all_events = Event.find(:all, conditions: ["? < date(events.end_date)", date], order: "start_date")
+      all_events = Event.where(["? < date(events.end_date)", date]).order(start_date: :asc)
     when "Student"
-      all_events += events.all(conditions: ["? < date(events.end_date)", date])
-      all_events += student_record.batch.events.all(conditions: ["? < date(events.end_date)", date],
-                                                    order: "start_date")
-      all_events += Event.all(conditions: ["(? < date(events.end_date)) and is_common = true", date],
-                              order: "start_date")
+      all_events += events.where(["? < date(events.end_date)", date])
+      all_events += student_record.batch.events.where(["? < date(events.end_date)", date]).order(start_date: :asc)
+      all_events += Event.where(["(? < date(events.end_date)) and is_common = true", date]).order(start_date: :asc)
     when "Parent"
-      all_events += events.all(conditions: ["? < date(events.end_date)", date])
-      all_events += parent_record.user.events.all(conditions: ["? < date(events.end_date)", date])
-      all_events += parent_record.batch.events.all(conditions: ["? < date(events.end_date)", date],
-                                                   order: "start_date")
-      all_events += Event.all(conditions: ["(? < date(events.end_date)) and is_common = true", date],
-                              order: "start_date")
+      all_events += events.where(["? < date(events.end_date)", date])
+      all_events += parent_record.user.events.where(["? < date(events.end_date)", date])
+      all_events += parent_record.batch.events.where(["? < date(events.end_date)", date]).order(start_daate: :asc)
+      all_events += Event.where(["(? < date(events.end_date)) and is_common = true", date]).order(start_date: :asc)
     when "Employee"
-      all_events += events.all(conditions: ["? < date(events.end_date)", date], order: "start_date")
-      all_events += employee_record.employee_department.events.all(conditions: ["? < date(events.end_date)", date],
-                                                                   order: "start_date")
-      all_events += Event.all(conditions: ["(? < date(events.end_date)) and is_exam = true", date],
-                              order: "start_date")
-      all_events += Event.all(conditions: ["(? < date(events.end_date)) and is_common = true", date],
-                              order: "start_date")
+      all_events += events.where(["? < date(events.end_date)", date]).order(start_date: :asc)
+      all_events += employee_record.employee_department.events.where(["? < date(events.end_date)", date]).order(start_date: :asc)
+      all_events += Event.where(["(? < date(events.end_date)) and is_exam = true", date]).order(start_date: :asc)
+      all_events += Event.where(["(? < date(events.end_date)) and is_common = true", date]).order(start_date: :asc)
     end
     start_date = all_events.collect(&:start_date).min
     if start_date
       (start_date.to_date <= date ? date + 1.day : start_date)
-
     else
       ""
     end
