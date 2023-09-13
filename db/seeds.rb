@@ -1,4 +1,4 @@
-print "Beginning seeding process ..."
+Rails.logger.debug "Beginning seeding process ..."
 [
   { "config_key" => "InstitutionName", "config_value" => "" },
   { "config_key" => "InstitutionAddress", "config_value" => "" },
@@ -31,6 +31,10 @@ end
   Configuration.find_or_create_by(config_key: param["config_key"], config_value: param["config_value"])
 end
 
+# TODO: create a course
+
+# TODO: create a batch
+
 if GradingLevel.count.zero?
   [
     { "name" => "A", "min_score" => 90 },
@@ -44,17 +48,17 @@ if GradingLevel.count.zero?
   end
 end
 
-if User.where(admin: true ).first.blank?
+if User.where(admin: true).first.blank?
 
   employee_category = Hr::EmployeeCategory.find_or_create_by(prefix: 'Admin', name: 'System Admin', status: true)
 
   employee_position = Hr::EmployeePosition.find_or_create_by(name: 'System Admin',
-                                                              employee_category_id: employee_category.id, status: true)
+                                                             employee_category_id: employee_category.id, status: true)
 
   employee_department = Hr::EmployeeDepartment.find_or_create_by(code: 'Admin', name: 'System Admin', status: true)
 
   employee_grade = Hr::EmployeeGrade.find_or_create_by(name: 'System Admin', priority: 0, status: true,
-                                                        max_hours_day: nil, max_hours_week: nil)
+                                                       max_hours_day: nil, max_hours_week: nil)
 
   employee = Hr::Employee.find_or_create_by(employee_number: 'admin',
                                             joining_date: Date.current,
@@ -78,7 +82,7 @@ end
   { "name" => 'Fee', "description" => ' ', "is_income" => true }
 ].each do |param|
   Finance::FinanceTransactionCategory.find_or_create_by(name: param["name"],
-                                                        description: param["description"], 
+                                                        description: param["description"],
                                                         is_income: param["is_income"])
 end
 
@@ -131,7 +135,7 @@ unless addl_fields.empty?
   priority = last_priority + 1 unless last_priority.nil?
   nil_priority_fields = addl_fields.select { |f| f.priority.nil? }
   nil_priority_fields.each do |p|
-    p.update(priority: priority)
+    p.update(priority:)
     priority += 1
   end
 end
@@ -144,7 +148,7 @@ unless addl_fields.empty?
   priority = last_priority + 1 unless last_priority.nil?
   nil_priority_fields = addl_fields.select { |f| f.priority.nil? }
   nil_priority_fields.each do |p|
-    p.update(priority: priority)
+    p.update(priority:)
     priority += 1
   end
 end
@@ -155,57 +159,57 @@ Privilege.reset_column_information
 system_settings_tag = PrivilegeTag.find_by(name_tag: 'system_settings')
 
 Privilege.create name: 'GeneralSettings', description: 'general_settings_privilege',
-  privilege_tag_id: system_settings_tag.id, priority: 10
+                 privilege_tag_id: system_settings_tag.id, priority: 10
 Privilege.create name: 'AddNewBatch', description: 'add_new_batch_privilege',
-  privilege_tag_id: system_settings_tag.id, priority: 20
+                 privilege_tag_id: system_settings_tag.id, priority: 20
 Privilege.create name: 'SubjectMaster', description: 'subject_master_privilege',
-  privilege_tag_id: system_settings_tag.id, priority: 30
+                 privilege_tag_id: system_settings_tag.id, priority: 30
 Privilege.create name: 'SMSManagement', description: 'sms_management_privilege',
-  privilege_tag_id: system_settings_tag.id, priority: 40
+                 privilege_tag_id: system_settings_tag.id, priority: 40
 
 # administration_operations
 administration_operations_tag = PrivilegeTag.find_by(name_tag: 'administration_operations')
 
-Privilege.create name: 'HrBasics', description: 'hr_basics_privilege', 
-  privilege_tag_id: administration_operations_tag.id, priority: 50
-Privilege.create name: 'EmployeeSearch', description: 'employee_search_privilege', 
-  privilege_tag_id: administration_operations_tag.id, priority: 60
+Privilege.create name: 'HrBasics', description: 'hr_basics_privilege',
+                 privilege_tag_id: administration_operations_tag.id, priority: 50
+Privilege.create name: 'EmployeeSearch', description: 'employee_search_privilege',
+                 privilege_tag_id: administration_operations_tag.id, priority: 60
 Privilege.create name: 'EmployeeAttendance', description: 'employee_attendance_privilege',
-  privilege_tag_id: administration_operations_tag.id, priority: 70
+                 privilege_tag_id: administration_operations_tag.id, priority: 70
 Privilege.create name: 'PayslipPowers', description: 'payslip_powers_privilege',
-  privilege_tag_id: administration_operations_tag.id, priority: 80
+                 privilege_tag_id: administration_operations_tag.id, priority: 80
 Privilege.create name: 'FinanceControl', description: 'finance_control_privilege',
-  privilege_tag_id: administration_operations_tag.id, priority: 90
+                 privilege_tag_id: administration_operations_tag.id, priority: 90
 Privilege.create name: 'EventManagement', description: 'event_management_privilege',
-  privilege_tag_id: administration_operations_tag.id, priority: 100
+                 privilege_tag_id: administration_operations_tag.id, priority: 100
 Privilege.create name: 'ManageNews', description: 'manage_news_privilege',
-  privilege_tag_id: administration_operations_tag.id, priority: 110
+                 privilege_tag_id: administration_operations_tag.id, priority: 110
 
 # academics
 academics_tag = PrivilegeTag.find_by(name_tag: 'academics')
 Privilege.create name: 'ExaminationControl', description: 'examination_control_privilege',
-  privilege_tag_id: academics_tag.id, priority: 230
+                 privilege_tag_id: academics_tag.id, priority: 230
 Privilege.create name: 'EnterResults', description: 'enter_results_privilege',
-  privilege_tag_id: academics_tag.id, priority: 240
+                 privilege_tag_id: academics_tag.id, priority: 240
 Privilege.create name: 'ViewResults', description: 'view_results_privilege',
-  privilege_tag_id: academics_tag.id, priority: 250
+                 privilege_tag_id: academics_tag.id, priority: 250
 Privilege.create name: 'ManageTimetable', description: 'manage_timetable_privilege',
-  privilege_tag_id: academics_tag.id, priority: 260
+                 privilege_tag_id: academics_tag.id, priority: 260
 Privilege.create name: 'TimetableView', description: 'timetable_view_privilege',
-  privilege_tag_id: academics_tag.id, priority: 270
+                 privilege_tag_id: academics_tag.id, priority: 270
 
 # student_management
 student_management_tag = PrivilegeTag.find_by(name_tag: 'student_management')
 Privilege.create name: 'Admission', description: 'admission_privilege',
-  privilege_tag_id: student_management_tag.id, priority: 280
+                 privilege_tag_id: student_management_tag.id, priority: 280
 Privilege.create name: 'StudentsControl', description: 'students_control_privilege',
-  privilege_tag_id: student_management_tag.id, priority: 290
+                 privilege_tag_id: student_management_tag.id, priority: 290
 Privilege.create name: 'StudentView', description: 'student_view_privilege',
-  privilege_tag_id: student_management_tag.id, priority: 300
+                 privilege_tag_id: student_management_tag.id, priority: 300
 Privilege.create name: 'StudentAttendanceRegister', description: 'student_attendance_register_privilege',
-  privilege_tag_id: student_management_tag.id, priority: 310
+                 privilege_tag_id: student_management_tag.id, priority: 310
 Privilege.create name: 'StudentAttendanceView', description: 'student_attendance_view_privilege',
-  privilege_tag_id: student_management_tag.id, priority: 320
+                 privilege_tag_id: student_management_tag.id, priority: 320
 
 Privilege.all.each do |p|
   p.update(description: "#{p.name.underscore}_privilege")
@@ -429,4 +433,4 @@ end
  "Palestine"].each do |param|
   Country.find_or_create_by(name: param)
 end
-print "Finished seeding data successfully"
+Rails.logger.debug "Finished seeding data successfully"
