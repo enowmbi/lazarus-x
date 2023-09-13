@@ -43,8 +43,7 @@ class User < ApplicationRecord
   end
 
   def check_reminders
-    reminders = []
-    reminders = Reminder.find(:all, conditions: ["recipient = '#{id}'"])
+    reminders = Reminder.where(recipient: id) # TODO: REMOVE Reminder.where(["recipient = '#{id}'"])
     count = 0
     reminders.each do |r|
       count += 1 unless r.is_read
@@ -53,7 +52,7 @@ class User < ApplicationRecord
   end
 
   def self.authenticate?(username, password)
-    user = User.find_by(username: username)
+    user = User.find_by(username:)
     user.hashed_password == Digest::SHA1.hexdigest(user.salt + password)
   end
 
@@ -118,18 +117,27 @@ class User < ApplicationRecord
       all_events = Event.where(["? between date(events.start_date) and date(events.end_date)", date])
     when "Student"
       all_events += events.where(["? between date(events.start_date) and date(events.end_date)", date])
-      all_events += student_record.batch.events.where(["? between date(events.start_date) and date(events.end_date)", date])
-      all_events += Event.where(["(? between date(events.start_date) and date(events.end_date)) and is_common = true", date])
+      all_events += student_record.batch.events.where(["? between date(events.start_date) and date(events.end_date)",
+                                                       date])
+      all_events += Event.where(["(? between date(events.start_date) and date(events.end_date)) and is_common = true",
+                                 date])
     when "Parent"
       all_events += events.where(["? between date(events.start_date) and date(events.end_date)", date])
-      all_events += parent_record.user.events.where(["? between date(events.start_date) and date(events.end_date)", date])
-      all_events += parent_record.batch.events.where(["? between date(events.start_date) and date(events.end_date)", date])
-      all_events += Event.where(["(? between date(events.start_date) and date(events.end_date)) and is_common = true", date])
+      all_events += parent_record.user.events.where(["? between date(events.start_date) and date(events.end_date)",
+                                                     date])
+      all_events += parent_record.batch.events.where(["? between date(events.start_date) and date(events.end_date)",
+                                                      date])
+      all_events += Event.where(["(? between date(events.start_date) and date(events.end_date)) and is_common = true",
+                                 date])
     when "Employee"
       all_events += events.where(["? between events.start_date and events.end_date", date])
-      all_events += employee_record.employee_department.events.where(["? between date(events.start_date) and date(events.end_date)", date ])
-      all_events += Event.where(["(? between date(events.start_date) and date(events.end_date)) and is_exam = true", date])
-      all_events += Event.where(["(? between date(events.start_date) and date(events.end_date)) and is_common = true", date])
+      all_events += employee_record.employee_department.events.where([
+                                                                       "? between date(events.start_date) and date(events.end_date)", date
+                                                                     ])
+      all_events += Event.where(["(? between date(events.start_date) and date(events.end_date)) and is_exam = true",
+                                 date])
+      all_events += Event.where(["(? between date(events.start_date) and date(events.end_date)) and is_common = true",
+                                 date])
     end
     all_events
   end
@@ -150,7 +158,8 @@ class User < ApplicationRecord
       all_events += Event.where(["(? < date(events.end_date)) and is_common = true", date]).order(start_date: :asc)
     when "Employee"
       all_events += events.where(["? < date(events.end_date)", date]).order(start_date: :asc)
-      all_events += employee_record.employee_department.events.where(["? < date(events.end_date)", date]).order(start_date: :asc)
+      all_events += employee_record.employee_department.events.where(["? < date(events.end_date)",
+                                                                      date]).order(start_date: :asc)
       all_events += Event.where(["(? < date(events.end_date)) and is_exam = true", date]).order(start_date: :asc)
       all_events += Event.where(["(? < date(events.end_date)) and is_common = true", date]).order(start_date: :asc)
     end
